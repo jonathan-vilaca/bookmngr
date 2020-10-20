@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "5932035795",
+    "firebase_url": "https://biblioepsa.firebaseio.com",
+    "project_id": "biblioepsa",
+    "storage_bucket": "biblioepsa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5932035795:android:23cb1c3011645051966e26",
+        "android_client_info": {
+          "package_name": "com.example.bookmngr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5932035795-01u6vqfhbf799gljesqp8mdd7f2hfrfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrH-XQB9tXbVk0jpO9ao8a3slP4fYvQWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5932035795-01u6vqfhbf799gljesqp8mdd7f2hfrfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
