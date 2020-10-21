@@ -25,10 +25,13 @@ class _loginState extends State<login> {
   }
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.blue,
       body: Container(
+        width: size.width,
+        height: size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('images/telazero.png'),
@@ -44,12 +47,14 @@ class _loginState extends State<login> {
                 ),
                 Padding(padding: const EdgeInsets.all(20)),
               Row(//Icones de usuarios 
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Image(image: AssetImage('images/bb.png'), 
-                    width: 170, height: 170),
+                    width: size.width * .4,
+                    height: size.width * .45),
                   Image(image: AssetImage('images/bl.png'),
-                    width: 170, height: 170)
+                    width: size.width * .4,
+                    height: size.width * .45)
                 ],
               ),
               Row(//Radiobuttons
@@ -114,17 +119,25 @@ class _loginState extends State<login> {
                       color: Colors.indigo[100],
                       onPressed: (){//Botão de validação do usuário
                         if (tipousuer == 'biblio') {
-                          if ((usuario.length <= 0)){
-                           Fluttertoast.showToast(
-                                msg: "Favor preencher o nome de usuário!",
-                                toastLength: Toast.LENGTH_LONG,
+                          if ((usuario == null && senha == null)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite um Usuário e Senha!",
+                                toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0
-                          );
-                          }else{
+                                timeInSecForIosWeb: 1);
+                          } else if ((usuario == null || usuario.length <= 0)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite um Usuário!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1);
+                          } else if ((senha == null || usuario.length <= 0)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite uma Senha!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1);            
+                          }else{                          
                             Navigator.push(context, MaterialPageRoute(
                               builder: (BuildContext context) => biblioopcoes()));
                           }
