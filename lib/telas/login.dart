@@ -142,7 +142,28 @@ class _loginState extends State<login> {
                               builder: (BuildContext context) => biblioopcoes()));
                           }
                         } else if(tipousuer == 'leitor') {
-
+                          if ((usuario == null && senha == null)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite um Usuário e Senha!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1);
+                          } else if ((usuario == null || usuario.length <= 0)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite um Usuário!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1);
+                          } else if ((senha == null || usuario.length <= 0)) {
+                            Fluttertoast.showToast(
+                                msg: "Digite uma Senha!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1);            
+                          }else{                          
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) => biblioopcoes()));
+                          }
                         }                       
                       },
                         child:
