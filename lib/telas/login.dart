@@ -82,7 +82,7 @@ class _loginState extends State<login> {
               ),
               Padding(padding: const EdgeInsets.all(10)),
                 TextField(//USUARIO                                  
-                  onChanged: (user){
+                  onChanged: (String user){
                     usuario = user;
                   },
                   decoration:
@@ -96,7 +96,7 @@ class _loginState extends State<login> {
                 ),
             Padding(padding: const EdgeInsets.all(10),),
             TextField(//SENHA   
-              onChanged: (pass){
+              onChanged: (String pass){
                   senha = pass;
                 },          
               obscureText: true,
