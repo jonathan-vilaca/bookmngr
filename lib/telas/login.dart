@@ -33,8 +33,8 @@ class _loginState extends State<login> {
         width: size.width,
         height: size.height,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/telazero.png'),
+            image: DecorationImage(
+            image: AssetImage('images/login.png'),
             fit: BoxFit.cover,
             ),
         ),
@@ -42,20 +42,37 @@ class _loginState extends State<login> {
           Column(
             children: <Widget>[
               Container(
-                child: Image(
-                  image: AssetImage('images/logobook.png')),
-                ),
-                Padding(padding: const EdgeInsets.all(20)),
+                height: size.height*.25,
+              ),
               Row(//Icones de usuarios 
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,            
                 children: <Widget>[
-                  Image(image: AssetImage('images/bb.png'), 
-                    width: size.width * .4,
-                    height: size.width * .45),
-                  Image(image: AssetImage('images/bl.png'),
-                    width: size.width * .4,
-                    height: size.width * .45)
-                ],
+                  GestureDetector(
+                    child: Image.asset(
+                      'images/bb.png', 
+                       width: size.width * .4,
+                        height: size.width * .45,
+                         fit: BoxFit.cover,
+                         ),
+                         onTap: () {
+                          setState(() {
+                            tipousuer = 'biblio'; 
+                          });
+                         },
+                     ),
+                  GestureDetector(
+                    child: Image.asset(
+                      'images/bl.png', 
+                       width: size.width * .4,
+                        height: size.width * .45,
+                         fit: BoxFit.cover,
+                         ),
+                         onTap: () {
+                          setState(() {
+                            tipousuer = 'leitor'; 
+                          });
+                         },
+                     ),],
               ),
               Row(//Radiobuttons
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,7 +97,9 @@ class _loginState extends State<login> {
                     })
                 ],
               ),
-              Padding(padding: const EdgeInsets.all(10)),
+              Container(
+                height: size.height * .04,
+              ),
                 TextField(//USUARIO                                  
                   onChanged: (String user){
                     usuario = user;
@@ -94,7 +113,9 @@ class _loginState extends State<login> {
                     fillColor: Colors.white70,
                  ),
                 ),
-            Padding(padding: const EdgeInsets.all(10),),
+              Container(
+                height: size.height*.03,
+              ),
             TextField(//SENHA   
               onChanged: (String pass){
                   senha = pass;
@@ -109,7 +130,9 @@ class _loginState extends State<login> {
                   fillColor: Colors.white70,                
                 ),
               ),
-            Padding(padding: const EdgeInsets.all(20)),
+              Container(
+                height: size.height*.05,
+              ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -119,7 +142,8 @@ class _loginState extends State<login> {
                       color: Colors.indigo[100],
                       onPressed: (){//Botão de validação do usuário
                         if (tipousuer == 'biblio') {
-                          if ((usuario == null && senha == null)) {
+                          if ((usuario == null && senha == null) || 
+                          (usuario.length<=0 && senha.length<=0)) {
                             Fluttertoast.showToast(
                                 msg: "Digite um Usuário e Senha!",
                                 toastLength: Toast.LENGTH_SHORT,
@@ -178,12 +202,12 @@ class _loginState extends State<login> {
                           builder: (BuildContext context) => novoleitor()));
                       },
                         child:
-                          Text('NOVO LEITOR'),
+                          Text('REGISTRAR'),
                   ),
                   ]),
             ],
           ),
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.all(10),
       ),
     );
   }
