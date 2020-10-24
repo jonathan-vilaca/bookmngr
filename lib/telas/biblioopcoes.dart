@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 class biblioopcoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.red,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/telazero.png'),
+            image: AssetImage('images/login.png'),
             fit: BoxFit.cover,
             ),
         ),
@@ -17,10 +18,8 @@ class biblioopcoes extends StatelessWidget {
         Column(
           children: <Widget>[
             Container(
-              child: Image(
-                  image: AssetImage('images/logobook.png')),
+              height: size.height*.25,
             ),
-            Padding(padding: const EdgeInsets.all(25)),
             Row(//2 botões
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[            
@@ -32,8 +31,8 @@ class biblioopcoes extends StatelessWidget {
                      GestureDetector(
                        child: Image.asset(
                         'images/acervoicon.png', 
-                         width: 150,
-                         height: 150,
+                         width: size.width*.4,
+                         height: size.width*.4,
                          fit: BoxFit.cover,
                          color: Colors.indigo[900],
                          ),
@@ -52,8 +51,8 @@ class biblioopcoes extends StatelessWidget {
                      GestureDetector(
                        child: Image.asset(
                         'images/comprasicon.png', 
-                         width: 150,
-                         height: 150,
+                         width: size.width*.4,
+                         height: size.width*.4,
                          fit: BoxFit.cover,
                          color: Colors.amber[600],
                          ),
@@ -66,7 +65,9 @@ class biblioopcoes extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(padding: const EdgeInsets.all(15)),
+            Container(
+              height: size.height*.01,
+            ),
              Row(//2 botões
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -78,8 +79,8 @@ class biblioopcoes extends StatelessWidget {
                      GestureDetector(
                        child: Image.asset(
                         'images/acervoicon.png', 
-                         width: 150,
-                         height: 150,
+                         width: size.width*.4,
+                         height: size.width*.4,
                          fit: BoxFit.cover,
                          ),
                          onTap: () {
@@ -97,8 +98,8 @@ class biblioopcoes extends StatelessWidget {
                      GestureDetector(
                        child: Image.asset(
                         'images/acervoicon.png', 
-                         width: 150,
-                         height: 150,
+                         width: size.width*.4,
+                         height: size.width*.4,
                          fit: BoxFit.cover,
                          ),
                          onTap: () {
