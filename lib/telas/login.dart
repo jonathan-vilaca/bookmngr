@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 // ignore: camel_case_types
@@ -16,12 +17,21 @@ class login extends StatefulWidget{
 class _loginState extends State<login> {
   String usuario, senha, tipousuer;
   var db = Firestore.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  _login() async {
+    try{
+      await _googleSignIn.signIn();
+    }catch(err){
+      print(err);
+    }
+  }
+  _logout(){
+    try{
+      _googleSignIn.signOut();
+    }catch(err){
+      print(err);
+    }
 
-   void initState() {//Iniciar a tela com o radio leitor habilitado
-    setState(() {
-      tipousuer = 'leitor';
-    });
-    super.initState();
   }
   @override
   Widget build(BuildContext context) {
@@ -41,64 +51,33 @@ class _loginState extends State<login> {
         child:
           Column(
             children: <Widget>[
-              Container(
-                height: size.height*.25,
+              SizedBox(
+                height: size.height*.22,
               ),
               Row(//Icones de usuarios 
                 mainAxisAlignment: MainAxisAlignment.spaceAround,            
                 children: <Widget>[
-                  GestureDetector(
+                  Container(
                     child: Image.asset(
-                      'images/bb.png', 
-                       width: size.width * .4,
-                        height: size.width * .45,
+                      'images/3.png',                       
+                        width: size.width * .5,
+                        height: size.width * .5,                        
                          fit: BoxFit.cover,
                          ),
-                         onTap: () {
-                          setState(() {
-                            tipousuer = 'biblio'; 
-                          });
-                         },
-                     ),
-                  GestureDetector(
-                    child: Image.asset(
-                      'images/bl.png', 
-                       width: size.width * .4,
-                        height: size.width * .45,
-                         fit: BoxFit.cover,
-                         ),
-                         onTap: () {
-                          setState(() {
-                            tipousuer = 'leitor'; 
-                          });
-                         },
-                     ),],
-              ),
-              Row(//Radiobuttons
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[    
-                  Radio(
-                    value: 'biblio',
-                    activeColor: Colors.blue[900],  
-                    groupValue: tipousuer,
-                    onChanged: (String valor){
-                      setState(() {
-                        tipousuer = valor;
-                      });
-                    }),
-                  Radio(
-                    value: 'leitor',
-                    activeColor: Colors.amber[100], 
-                    groupValue: tipousuer, 
-                    onChanged: (String valor){                      
-                      setState(() {
-                        tipousuer = valor;
-                      });
-                    })
+                  ),
                 ],
               ),
-              Container(
-                height: size.height * .04,
+              SizedBox(
+                height: size.height*.03,
+              ),
+              SizedBox(//SEPARAR BOTÕES DE LOGIN
+                height: size.height*.03,
+                width: size.width,    
+                child:Text("LOGAR COMO BIBLIOTECÁRIO:",
+                  style: TextStyle(
+                  color: Colors.white,               
+                ),textAlign: TextAlign.left
+                ),
               ),
                 TextField(//USUARIO                                  
                   onChanged: (String user){
@@ -113,8 +92,8 @@ class _loginState extends State<login> {
                     fillColor: Colors.white70,
                  ),
                 ),
-              Container(
-                height: size.height*.03,
+              SizedBox(
+                height: size.height*.01,
               ),
             TextField(//SENHA   
               onChanged: (String pass){
@@ -130,84 +109,88 @@ class _loginState extends State<login> {
                   fillColor: Colors.white70,                
                 ),
               ),
-              Container(
-                height: size.height*.05,
+              SizedBox(
+                height: size.height*.04,
               ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    RaisedButton(
-                      splashColor: Colors.blue[900],
-                      textColor: Colors.black87,
-                      color: Colors.indigo[100],
-                      onPressed: (){//Botão de validação do usuário
-                        if (tipousuer == 'biblio') {
-                          if ((usuario == null && senha == null) || 
-                          (usuario.length<=0 && senha.length<=0)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite um Usuário e Senha!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);
-                          } else if ((usuario == null || usuario.length <= 0)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite um Usuário!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);
-                          } else if ((senha == null || usuario.length <= 0)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite uma Senha!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);            
-                          }else{                          
-                            Navigator.push(context, MaterialPageRoute(
+              Container(//BOTÃO ENTRAR VIA LOGIN BIBLIOTECÁRIO
+                width: size.height,
+                height: size.height * .07,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                    Colors.indigo[700], 
+                    Colors.indigo[50]]
+                    )
+                ),
+                child:
+                  SizedBox.expand(
+                    child: FlatButton(
+                      child:
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[ 
+                            Text("ENTRAR",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
                               builder: (BuildContext context) => biblioopcoes()));
-                          }
-                        } else if(tipousuer == 'leitor') {
-                          if ((usuario == null && senha == null)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite um Usuário e Senha!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);
-                          } else if ((usuario == null || usuario.length <= 0)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite um Usuário!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);
-                          } else if ((senha == null || usuario.length <= 0)) {
-                            Fluttertoast.showToast(
-                                msg: "Digite uma Senha!",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1);            
-                          }else{                          
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (BuildContext context) => biblioopcoes()));
-                          }
-                        }                       
-                      },
-                        child:
-                          Text('ENTRAR'),
+                        }),
+                    ),
+                ),
+                SizedBox(//SEPARAR BOTÕES DE LOGIN
+                  height: size.height*.025,
+                  width: size.width,
+                  child: Text("ou", style: TextStyle(
+                    color: Colors.white,               
+                  ),textAlign: TextAlign.center
                   ),
-                  RaisedButton(
-                      splashColor: Colors.amber[100],
-                      textColor: Colors.black87,
-                      color: Colors.indigo[100],
-                      onPressed: (){//Botão de cadastrar novo leitor
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => novoleitor()));
-                      },
-                        child:
-                          Text('REGISTRAR'),
-                  ),
-                  ]),
+                ),
+              Container(//BOTÃO ENTRAR VIA GOOGLE
+                width: size.height,
+                height: size.height * .07,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                    Colors.indigo[700], 
+                    Colors.indigo[50]]
+                    )
+                ),
+                child:
+                  SizedBox.expand(
+                    child: FlatButton( 
+                      child:
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[ 
+                            Text("LOGAR COMO LEITOR   ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            ),
+                            Container(
+                              child: SizedBox(
+                                height: size.height * .06,
+                                width: size.width * .06,
+                                child: Image.asset('images/google.png', alignment: Alignment.centerRight,),
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () {
+                          _login();
+                        }),
+                    ),
+                ), 
             ],
           ),
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(25),
       ),
     );
   }

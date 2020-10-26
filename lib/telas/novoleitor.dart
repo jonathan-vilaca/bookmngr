@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -8,6 +9,8 @@ class novoleitor extends StatefulWidget {
 
 // ignore: camel_case_types
 class _novoleitorState extends State<novoleitor> {
+  var db = Firestore.instance;
+
   String novousuario = '', novasenha = '', repetesenha = '';
   @override
   Widget build(BuildContext context) {
@@ -80,11 +83,15 @@ class _novoleitorState extends State<novoleitor> {
                       splashColor: Colors.blue[900],
                       textColor: Colors.black87,
                       color: Colors.indigo[100],
-                      onPressed: (){//Botão de criação de novo leitor
-
-
-
-                        
+                      onPressed: (){//Botão de criação de novo leitor                     
+                        db.collection('leitor')
+                          .document()
+                            .setData(
+                              {
+                              "nome":novousuario,
+                              "senha":novasenha
+                              }
+                            );                        
                       },
                         child:
                           Text('CADASTRAR'),
