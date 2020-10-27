@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: camel_case_types
@@ -52,7 +53,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String cod){
                 codigo = cod;
               },
-                decoration: 
+                decoration:
                   InputDecoration(
                     labelText: 'Código do livro',
                     border: OutlineInputBorder(),
@@ -111,6 +112,7 @@ class _insertlivrosstate extends State<insertlivros>{
                     filled: true,
                     fillColor: Colors.white70,
                   ),
+                  keyboardType: TextInputType.number,
             ),
             SizedBox(//SEPARADOR DE TEXTFIELD
                 height: size.height*.008,
@@ -162,6 +164,7 @@ class _insertlivrosstate extends State<insertlivros>{
                     filled: true,
                     fillColor: Colors.white70,
                   ),
+                  keyboardType: TextInputType.number,
             ),
               SizedBox(
                 height: size.height*.05,

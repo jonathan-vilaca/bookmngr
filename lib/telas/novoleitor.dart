@@ -15,7 +15,7 @@ class _novoleitorState extends State<novoleitor> {
   _newleitor(usuario, senha) async{
     var db = Firestore.instance;
      db.collection('leitor')
-        .document('asddgsg')
+        .document('teste')
           .setData(
             {
             "nome":usuario,

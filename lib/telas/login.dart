@@ -19,8 +19,10 @@ class _loginState extends State<login> {
   String usuario, senha, tipousuer;
   var db = Firestore.instance;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  bool login = false;
   _login() async {
     try{
+      login = true;
       await _googleSignIn.signIn();
     }catch(err){
       print(err);
@@ -28,6 +30,7 @@ class _loginState extends State<login> {
   }
   _logout(){
     try{
+      login = false;
       _googleSignIn.signOut();
     }catch(err){
       print(err);
@@ -125,7 +128,7 @@ class _loginState extends State<login> {
                 ),
                 child:
                   SizedBox.expand(
-                    child: FlatButton(
+                    child: FlatButton(                    
                       child:
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -185,9 +188,15 @@ class _loginState extends State<login> {
                           ],
                         ),
                         onPressed: () {
-                          //_login();
+                          _login();
+                          if (login = true){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (BuildContext context) => novoleitor()));
+                          }else{
+                            Fluttertoast.showToast(
+                                msg: "ERRO AO CONECTAR!",
+                                toastLength: Toast.LENGTH_SHORT);
+                          }
                         }),
                     ),
                 ), 
