@@ -1,5 +1,5 @@
 import 'package:bookmngr/telas/biblioopcoes.dart';
-import 'package:bookmngr/telas/novoleitor.dart';
+//import 'package:bookmngr/telas/novoleitor.dart';
 //import 'package:bookmngr/telas/novoleitor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -190,8 +190,7 @@ class _loginState extends State<login> {
                         onPressed: () {
                           _login();
                           if (login = true){
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (BuildContext context) => novoleitor()));
+                            
                           }else{
                             Fluttertoast.showToast(
                                 msg: "ERRO AO CONECTAR!",
