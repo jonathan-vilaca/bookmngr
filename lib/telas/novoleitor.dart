@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: camel_case_types
 class novoleitor extends StatefulWidget {
@@ -11,7 +12,19 @@ class novoleitor extends StatefulWidget {
 class _novoleitorState extends State<novoleitor> {
   var db = Firestore.instance;
 
-  String novousuario = '', novasenha = '', repetesenha = '';
+  _newleitor(usuario, senha) async{
+    var db = Firestore.instance;
+     db.collection('leitor')
+        .document('asddgsg')
+          .setData(
+            {
+            "nome":usuario,
+            "senha":senha
+            }
+          );
+  }
+
+  String novousuario, novasenha, repetesenha;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +33,7 @@ class _novoleitorState extends State<novoleitor> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/telazero.png'),
+            image: AssetImage('images/3.png'),
             fit: BoxFit.cover,
             ),
         ),
@@ -78,20 +91,26 @@ class _novoleitorState extends State<novoleitor> {
                   fillColor: Colors.white70,                
                 )
               ),
-            Padding(padding: const EdgeInsets.all(20)),
+            Padding(padding: const EdgeInsets.all(30)),
             RaisedButton(
                       splashColor: Colors.blue[900],
                       textColor: Colors.black87,
                       color: Colors.indigo[100],
-                      onPressed: (){//Botão de criação de novo leitor                     
-                        db.collection('leitor')
-                          .document()
-                            .setData(
-                              {
-                              "nome":novousuario,
-                              "senha":novasenha
-                              }
-                            );                        
+                      onPressed: (){//Botão de criação de novo leitor  
+                        try{                   
+                        _newleitor(novousuario, novasenha);
+                        Fluttertoast.showToast(
+                            msg: "USUÁRIO CADASTRADO COM SUCESSO!",
+                            toastLength: Toast.LENGTH_SHORT,
+
+                          );  
+                        }catch(error){
+                          Fluttertoast.showToast(
+                            msg: "USUÁRIO NÃO CADASTRADO!",
+                            toastLength: Toast.LENGTH_SHORT,
+
+                          );
+                        }                 
                       },
                         child:
                           Text('CADASTRAR'),

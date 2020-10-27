@@ -1,5 +1,6 @@
 import 'package:bookmngr/telas/biblioopcoes.dart';
 import 'package:bookmngr/telas/novoleitor.dart';
+//import 'package:bookmngr/telas/novoleitor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,7 +74,7 @@ class _loginState extends State<login> {
               SizedBox(//SEPARAR BOTÕES DE LOGIN
                 height: size.height*.03,
                 width: size.width,    
-                child:Text("LOGAR COMO BIBLIOTECÁRIO:",
+                child:Text("LOGAR COMO BIBLIOTECÁRIO(A):",
                   style: TextStyle(
                   color: Colors.white,               
                 ),textAlign: TextAlign.left
@@ -87,7 +88,7 @@ class _loginState extends State<login> {
                     InputDecoration(
                       labelText: 'Usuário',
                       border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.supervised_user_circle),
+                      prefixIcon: Icon(Icons.account_box),
                       filled: true,
                     fillColor: Colors.white70,
                  ),
@@ -184,7 +185,9 @@ class _loginState extends State<login> {
                           ],
                         ),
                         onPressed: () {
-                          _login();
+                          //_login();
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) => novoleitor()));
                         }),
                     ),
                 ), 

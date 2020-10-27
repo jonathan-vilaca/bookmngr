@@ -1,3 +1,4 @@
+import 'package:bookmngr/telas/insertlivros.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -17,9 +18,16 @@ class biblioopcoes extends StatelessWidget {
         child: 
         Column(
           children: <Widget>[
-            Container(
-              height: size.height*.25,
-            ),
+            SizedBox(//SEPARAR BOTÕES DE LOGIN
+                  height: size.height*.22,
+                  width: size.width,
+                  child:
+                    Container(alignment: Alignment.bottomLeft,
+                      child: Text("Olá Bibliotecário(a), o que deseja fazer?", style: TextStyle(
+                          color: Colors.white,),
+                      textAlign: TextAlign.left),
+                    ), 
+                ),
             Row(//2 botões
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[            
@@ -37,7 +45,8 @@ class biblioopcoes extends StatelessWidget {
                          color: Colors.indigo[900],
                          ),
                          onTap: () {
-                           
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) => insertlivros()));
                          },
                      )
                    ],
@@ -84,7 +93,7 @@ class biblioopcoes extends StatelessWidget {
                          fit: BoxFit.cover,
                          ),
                          onTap: () {
-                           
+ 
                          },
                      )
                    ],
