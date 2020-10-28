@@ -176,7 +176,11 @@ class biblioopcoes extends StatelessWidget {
             ),
           ],
         ),
-        padding: const EdgeInsets.all(25),
+        padding:  EdgeInsets.only(
+          left: size.width*.05, 
+          right: size.width*.05,
+          top: size.height*.03,
+          bottom: size.height*.01),
       ),
     );
   }

@@ -10,18 +10,10 @@ class buscalivros extends StatefulWidget {
   _buscalivrosState createState() => _buscalivrosState();
 }
 
+
 // ignore: camel_case_types
 class _buscalivrosState extends State<buscalivros>{
-  var db = Firestore.instance;
-
-  _buscar() async {
-    QuerySnapshot buscar = await db.collection("livros").getDocuments();
-
-    buscar.documents.forEach((livros) { 
-      livros.documentID == pesquisa;
-    });
-
-  }
+    var db = Firestore.instance;
   
   String pesquisa;
   @override
@@ -101,10 +93,36 @@ class _buscalivrosState extends State<buscalivros>{
                     ),
                     ),
                 ),
+                SizedBox(
+                    height: size.height*.005,
+                  ),
+                Container(
+                  child: StreamBuilder(
+                    stream: db.collection('livros').snapshots(),
+                    builder: (BuildContext context,AsyncSnapshot <QuerySnapshot> snapshot){
+                      if(snapshot.hasData){
+                        return Center(child: CircularProgressIndicator());
+                      }else{
+                        return ListView(
+                          children: snapshot.data.documents.map((livros){
+                            return ListTile(
+                              title: Text('Título: ' + livros['livros']['titulo']),
+                            );
+                          }).toList(),
+                        );
+                      }
+                    },
+                    ),
+
+                )
             ],
           ),
-        padding: const EdgeInsets.all(25)
-      ),
+          padding:  EdgeInsets.only(
+            left: size.width*.05, 
+            right: size.width*.05,
+            top: size.height*.03,
+            bottom: size.height*.02),
+      ),  
     );
   }
 }

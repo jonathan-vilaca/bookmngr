@@ -19,6 +19,7 @@ class _insertlivrosstate extends State<insertlivros>{
         .document(a)
           .setData(
           {
+            "codigo":a,
             "titulo":s,
             "genero":d,
             "exemplares":f,
@@ -167,7 +168,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   keyboardType: TextInputType.number,
             ),
               SizedBox(
-                height: size.height*.05,
+                height: size.height*.03,
               ),
             Container(//BOTÃO ENTRAR VIA LOGIN BIBLIOTECÁRIO
                 width: size.height,
@@ -196,7 +197,9 @@ class _insertlivrosstate extends State<insertlivros>{
                         ),
                         onPressed: () {
                           if((codigo.length > 0) && (codigo != null)){
-                              _insert(codigo, titulo, genero, exemplares, editora, autor, ano);
+                              _insert(codigo.toUpperCase(), titulo.toUpperCase(), 
+                                        genero.toUpperCase(), exemplares.toUpperCase(), 
+                                          editora.toUpperCase(), autor.toUpperCase(), ano.toUpperCase());
                               Fluttertoast.showToast(
                                 msg: "LIVRO CADASTRADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
@@ -210,7 +213,11 @@ class _insertlivrosstate extends State<insertlivros>{
                 ),
           ],
         ),
-        padding: const EdgeInsets.all(25)
+        padding:  EdgeInsets.only(
+          left: size.width*.05, 
+          right: size.width*.05,
+          top: size.height*.03,
+          bottom: size.height*.01),
       ),     
     );
   }
