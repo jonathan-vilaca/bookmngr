@@ -1,3 +1,4 @@
+import 'package:bookmngr/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,8 @@ class buscalivros extends StatefulWidget {
 // ignore: camel_case_types
 class _buscalivrosState extends State<buscalivros>{
   Future getDados() async {
-    var db = Firestore.instance;
-    QuerySnapshot dados = await db.collection('livros').getDocuments();
-    return dados.documents;
+    Stream<DocumentSnapshot> dados = db.collection('bookmngr').
+          document('livros').collection('titulo').document(pesquisa).snapshots();
   }
 
   
@@ -78,7 +78,7 @@ class _buscalivrosState extends State<buscalivros>{
                       return CircularProgressIndicator();
                     }else{
                       return ListView.builder(
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data.toString().length,
                         itemBuilder: (context, index){
                           return ListTile(
                             title: Text(snapshot.data[index].data(pesquisa)),

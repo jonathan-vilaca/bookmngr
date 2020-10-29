@@ -2,8 +2,8 @@ import 'package:bookmngr/services/database.dart';
 
 insertLivro(a, s, d, f, g, h, j) async{
 
-  db.collection('livros')
-    .document(a)
+  db.collection('bookmngr')
+    .document('livros')
       .setData(
       {
         "codigo":a,

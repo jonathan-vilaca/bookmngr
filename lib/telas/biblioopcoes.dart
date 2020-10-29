@@ -1,3 +1,4 @@
+import 'package:bookmngr/services/linkAmazon.dart';
 import 'package:bookmngr/telas/buscalivros.dart';
 import 'package:bookmngr/telas/insertlivros.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,8 @@ class biblioopcoes extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[            
                 Card(
+                elevation: 500,
+                color: Colors.transparent,
                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
@@ -45,7 +48,7 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.indigo[900],
+                         color: Colors.white70,
                          ),
                          onTap: () {
                           Navigator.push(context, MaterialPageRoute(
@@ -56,6 +59,8 @@ class biblioopcoes extends StatelessWidget {
                  ),
                 ),
                Card(
+                 elevation: 500,
+                 color: Colors.transparent,
                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
@@ -66,10 +71,10 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.indigo[900],
+                         color: Colors.white70,
                          ),
                          onTap: () {
-                           
+                           launchURL();
                          },
                      )
                    ],
@@ -84,6 +89,8 @@ class biblioopcoes extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                Card(
+                 elevation: 500,
+                 color: Colors.transparent,
                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
@@ -94,7 +101,7 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.indigo[900],
+                         color: Colors.white70,
                          ),
                          onTap: () {
                             Navigator.push(context, MaterialPageRoute(
@@ -105,7 +112,9 @@ class biblioopcoes extends StatelessWidget {
                  ),
                 ),
                 Card(
-                 semanticContainer: true,
+                  elevation: 500,
+                  color: Colors.transparent,
+                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
                    children: <Widget>[
@@ -115,7 +124,7 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.indigo[900],
+                         color: Colors.white70,
                          ),
                          onTap: () {
                            
@@ -133,6 +142,7 @@ class biblioopcoes extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                Card(
+                 color: Colors.transparent,
                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
@@ -143,7 +153,7 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         //color: Colors.indigo[900],
+                        // color: Colors.white70,
                          ),
                          onTap: () {
  
@@ -153,6 +163,7 @@ class biblioopcoes extends StatelessWidget {
                  ),
                 ),
                 Card(
+                  color: Colors.transparent,
                  semanticContainer: true,
                  clipBehavior: Clip.antiAliasWithSaveLayer,
                  child: Column(
@@ -163,7 +174,7 @@ class biblioopcoes extends StatelessWidget {
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         //color: Colors.indigo[900],
+                         //color: Colors.white70,
                          ),
                          onTap: () {
                            

@@ -1,9 +1,10 @@
 import 'package:bookmngr/services/servicesLivros.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'limparTextField.dart';
 
 // ignore: camel_case_types
 class insertlivros extends StatefulWidget {
@@ -14,7 +15,7 @@ class insertlivros extends StatefulWidget {
 // ignore: camel_case_types
 class _insertlivrosstate extends State<insertlivros>{
 
-  String codigo = '', titulo, genero, editora, autor, ano, exemplares;
+  String codigo, titulo, genero, editora, autor, ano, exemplares;
   @override
   Widget build(BuildContext context) {    
     var size = MediaQuery.of(context).size;
@@ -39,6 +40,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String cod){
                 codigo = cod;
               },
+                controller: cod,
                 decoration:
                   InputDecoration(
                     labelText: 'Código do livro',
@@ -52,10 +54,11 @@ class _insertlivrosstate extends State<insertlivros>{
                 height: size.height*.008,
                 width: size.width
               ),
-            TextField(//titulo
+            TextFormField(//titulo
               onChanged: (String tit){
                 titulo = tit;
               },
+                controller: liv,
                 decoration: 
                   InputDecoration(
                     labelText: 'Título do livro',
@@ -73,6 +76,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String gen){
                 genero = gen;
               },
+                controller: gen,
                 decoration: 
                   InputDecoration(
                     labelText: 'Gênero',
@@ -90,6 +94,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String exe){
                 exemplares = exe;
               },
+                controller: ne,
                 decoration: 
                   InputDecoration(
                     labelText: 'Número de exemplares',
@@ -108,6 +113,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String edi){
                 editora = edi;
               },
+                controller: edi,
                 decoration: 
                   InputDecoration(
                     labelText: 'Editora',
@@ -125,6 +131,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String aut){
                 autor = aut;
               },
+                controller: aut,
                 decoration: 
                   InputDecoration(
                     labelText: 'Autor',
@@ -142,6 +149,7 @@ class _insertlivrosstate extends State<insertlivros>{
               onChanged: (String lancamento){
                 ano = lancamento;
               },
+                controller: anoLa,
                 decoration: 
                   InputDecoration(
                     labelText: 'Ano de lançamento',
@@ -182,12 +190,11 @@ class _insertlivrosstate extends State<insertlivros>{
                         ),
                         onPressed: () {
                           if((codigo.length > 0) && (codigo != null)){
-                              insertLivro(codigo.toUpperCase(), titulo.toUpperCase(), 
-                                        genero.toUpperCase(), exemplares.toUpperCase(), 
-                                          editora.toUpperCase(), autor.toUpperCase(), ano.toUpperCase());
+                              insertLivro(codigo, titulo, genero, exemplares, editora, autor, ano);
                               Fluttertoast.showToast(
                                 msg: "LIVRO CADASTRADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
+                                clearTextInput();
                           }else{
                             Fluttertoast.showToast(
                               msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
