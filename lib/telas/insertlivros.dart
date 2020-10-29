@@ -1,3 +1,4 @@
+import 'package:bookmngr/services/servicesLivros.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,23 +13,7 @@ class insertlivros extends StatefulWidget {
 
 // ignore: camel_case_types
 class _insertlivrosstate extends State<insertlivros>{
-  var db = Firestore.instance;
-  
-  _insert(a, s, d, f, g, h, j) async{
-      db.collection('livros')
-        .document(a)
-          .setData(
-          {
-            "codigo":a,
-            "titulo":s,
-            "genero":d,
-            "exemplares":f,
-            "editora":g,
-            "autor":h,
-            "ano":j,
-          }
-          );
-  }
+
   String codigo = '', titulo, genero, editora, autor, ano, exemplares;
   @override
   Widget build(BuildContext context) {    
@@ -50,7 +35,7 @@ class _insertlivrosstate extends State<insertlivros>{
             SizedBox(
                 height: size.height*.22,
               ),
-            TextField(//Código
+            TextFormField(//Código
               onChanged: (String cod){
                 codigo = cod;
               },
@@ -170,7 +155,7 @@ class _insertlivrosstate extends State<insertlivros>{
               SizedBox(
                 height: size.height*.03,
               ),
-            Container(//BOTÃO ENTRAR VIA LOGIN BIBLIOTECÁRIO
+            Container(//BOTÃO INSERIR LIVROS
                 width: size.height,
                 height: size.height * .07,
                 decoration: BoxDecoration(
@@ -197,7 +182,7 @@ class _insertlivrosstate extends State<insertlivros>{
                         ),
                         onPressed: () {
                           if((codigo.length > 0) && (codigo != null)){
-                              _insert(codigo.toUpperCase(), titulo.toUpperCase(), 
+                              insertLivro(codigo.toUpperCase(), titulo.toUpperCase(), 
                                         genero.toUpperCase(), exemplares.toUpperCase(), 
                                           editora.toUpperCase(), autor.toUpperCase(), ano.toUpperCase());
                               Fluttertoast.showToast(

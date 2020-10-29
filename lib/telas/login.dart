@@ -1,6 +1,4 @@
 import 'package:bookmngr/telas/biblioopcoes.dart';
-//import 'package:bookmngr/telas/novoleitor.dart';
-//import 'package:bookmngr/telas/novoleitor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +18,7 @@ class _loginState extends State<login> {
   var db = Firestore.instance;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   bool login = false;
+
   _login() async {
     try{
       login = true;
@@ -28,6 +27,8 @@ class _loginState extends State<login> {
       print(err);
     }
   }
+
+
   _logout(){
     try{
       login = false;
@@ -35,8 +36,9 @@ class _loginState extends State<login> {
     }catch(err){
       print(err);
     }
-
   }
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -188,7 +190,7 @@ class _loginState extends State<login> {
                           ],
                         ),
                         onPressed: () {
-                          _login();
+                          _login();  
                           if (login = true){
                             
                           }else{
