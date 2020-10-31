@@ -70,23 +70,6 @@ class _buscalivrosState extends State<buscalivros>{
                 SizedBox(
                     height: size.height*.005,
                   ),
-                // Container(
-                //   child: FutureBuilder(
-                //     future: getDados(),
-                //     builder: (context, snapshot){
-                //     if(snapshot.connectionState == ConnectionState.waiting){
-                //       return CircularProgressIndicator();
-                //     }else{
-                //       return ListView.builder(
-                //         itemCount: snapshot.data.toString().length,
-                //         itemBuilder: (context, index){
-                //           return ListTile(
-                //             title: Text(snapshot.data[index].data(pesquisa)),
-                //           );
-                //         });
-                //     }
-                //   }),
-                // )
               ],
             ),
             padding:  EdgeInsets.only(

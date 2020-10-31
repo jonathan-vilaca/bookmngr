@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'limparTextField.dart';
 
 // ignore: camel_case_types
@@ -90,25 +89,6 @@ class _insertlivrosstate extends State<insertlivros>{
                 height: size.height*.008,
                 width: size.width
               ),
-            TextField(//Exemplares
-              onChanged: (String exe){
-                exemplares = exe;
-              },
-                controller: ne,
-                decoration: 
-                  InputDecoration(
-                    labelText: 'Número de exemplares',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.assignment),
-                    filled: true,
-                    fillColor: Colors.white70,
-                  ),
-                  keyboardType: TextInputType.number,
-            ),
-            SizedBox(//SEPARADOR DE TEXTFIELD
-                height: size.height*.008,
-                width: size.width
-              ),
             TextField(//editora
               onChanged: (String edi){
                 editora = edi;
@@ -190,7 +170,7 @@ class _insertlivrosstate extends State<insertlivros>{
                         ),
                         onPressed: () {
                           if((codigo.length > 0) && (codigo != null)){
-                              insertLivro(codigo, titulo, genero, exemplares, editora, autor, ano);
+                              insertLivro(codigo, titulo, genero, editora, autor, ano);
                               Fluttertoast.showToast(
                                 msg: "LIVRO CADASTRADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
