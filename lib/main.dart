@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bookmngr/telas/login.dart';
+import 'package:bookmngr/models/login.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,4 +1,4 @@
-import 'package:bookmngr/telas/biblioopcoes.dart';
+import 'package:bookmngr/models/biblioopcoes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

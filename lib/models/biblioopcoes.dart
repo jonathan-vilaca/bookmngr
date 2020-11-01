@@ -1,6 +1,6 @@
 import 'package:bookmngr/services/linkAmazon.dart';
-import 'package:bookmngr/telas/buscalivros.dart';
-import 'package:bookmngr/telas/insertlivros.dart';
+import 'package:bookmngr/models/buscalivros.dart';
+import 'package:bookmngr/models/insertlivros.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 insertLivro(a, s, d, g, h, j) async{
 
-  db.collection('livros')
+  db.collection("acervo")
     .document(s)
       .setData(
       {
@@ -19,8 +19,11 @@ insertLivro(a, s, d, g, h, j) async{
 
 buscarLivros() async {
   QuerySnapshot busca = 
-    await db.collection('livros').getDocuments();
-      busca.documents.forEach((livro) {
-        return livro;
-      });
+    await db.collection("acervo").getDocuments();
+      return busca.documents;
 }
+
+void deletarLivro(context, liv, position){
+  db.collection('acervo').document(liv.documentID).delete(); 
+}
+
