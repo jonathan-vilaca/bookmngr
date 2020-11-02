@@ -104,19 +104,20 @@ class _buscalivrosState extends State<buscalivros>{
                                               content: Text('Deseja realmente deletar o livro?'),
                                               actions: [
                                                 CupertinoDialogAction(child: Text('SIM'),
-                                                isDestructiveAction: true,
-                                                onPressed: (){
-                                                  deletarLivro(context, snapshot.data[index], index);
-                                                  setState(() {
-                                                    snapshot.data.removeAt(index);
-                                                  });
-                                                },
+                                                  isDestructiveAction: true,
+                                                  onPressed: (){
+                                                    deletarLivro(context, snapshot.data[index], index);
+                                                    setState(() {
+                                                      snapshot.data.removeAt(index);
+                                                    });
+                                                    Navigator.pop(context);
+                                                  },
                                                 ),
                                                 CupertinoDialogAction(child: Text('NÃO'),
-                                                isDestructiveAction: true,
-                                                onPressed: (){
-                                                  Navigator.pop(context);
-                                                },
+                                                  isDestructiveAction: true,
+                                                  onPressed: (){
+                                                    Navigator.pop(context);
+                                                  },
                                                 ),
                                               ],
                                             );
