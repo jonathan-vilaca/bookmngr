@@ -33,8 +33,8 @@ class _loginState extends State<login> {
     try{
       login = false;
       _googleSignIn.signOut();
-    }catch(err){
-      print(err);
+    }catch(error){
+      print(error);
     }
   }
 
@@ -58,7 +58,7 @@ class _loginState extends State<login> {
           Column(
             children: <Widget>[
               SizedBox(
-                height: size.height*.22,
+                height: size.height*.12,
               ),
               Row(//Icones de usuarios 
                 mainAxisAlignment: MainAxisAlignment.spaceAround,            
@@ -74,28 +74,32 @@ class _loginState extends State<login> {
                 ],
               ),
               SizedBox(
-                height: size.height*.03,
+                height: size.height*.1,
               ),
               SizedBox(//SEPARAR BOTÕES DE LOGIN
                 height: size.height*.03,
                 width: size.width,    
                 child:Text("LOGAR COMO BIBLIOTECÁRIO(A):",
                   style: TextStyle(
-                  color: Colors.white,               
+                    //fontStyle: ,
+                    shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 30)],
+                    color: Colors.white,               
                 ),textAlign: TextAlign.left
                 ),
               ),
-                TextField(//USUARIO                                  
+                TextField(//USUARIO                                
                   onChanged: (String user){
                     usuario = user;
                   },
+                  
                   decoration:
                     InputDecoration(
                       labelText: 'Usuário',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.account_box),
                       filled: true,
-                    fillColor: Colors.white70,
+                      fillColor: Colors.white70,
+
                  ),
                 ),
               SizedBox(
@@ -122,10 +126,11 @@ class _loginState extends State<login> {
                 width: size.height,
                 height: size.height * .07,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
                   gradient: LinearGradient(
                     colors: [
-                    Colors.indigo[700], 
-                    Colors.indigo[50]]
+                      Colors.brown[400], 
+                      Colors.brown[100]]
                     )
                 ),
                 child:
@@ -161,10 +166,11 @@ class _loginState extends State<login> {
                 width: size.height,
                 height: size.height * .07,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
                   gradient: LinearGradient(
                     colors: [
-                    Colors.indigo[700], 
-                    Colors.indigo[50]]
+                      Colors.brown[400], 
+                      Colors.brown[100]]
                     )
                 ),
                 child:

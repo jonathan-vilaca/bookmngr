@@ -47,5 +47,4 @@ class Livro{
     this._genero = map['genero'];
     this._titulo = map['titulo'];
   }
-
 }

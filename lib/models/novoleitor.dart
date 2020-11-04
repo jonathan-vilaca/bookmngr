@@ -33,14 +33,16 @@ class _novoleitorState extends State<novoleitor> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/3.png'),
+            image: AssetImage('images/desfoque.png'),
             fit: BoxFit.cover,
             ),
         ),
         child:
           Column(
             children: <Widget>[
-              Padding(padding: const EdgeInsets.all(25)),
+              Padding(
+                padding: const EdgeInsets.all(25)
+              ),
               Container(
                 child: Image(
                   width: double.infinity,

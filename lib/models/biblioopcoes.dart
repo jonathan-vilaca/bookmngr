@@ -13,15 +13,24 @@ class biblioopcoes extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/login.png'),
+            image: AssetImage('images/desfoque.png'),
             fit: BoxFit.cover,
             ),
         ),
         child: 
         Column(
           children: <Widget>[
+            Container(
+              height: size.height*.20,
+              width: size.width,
+              color: Colors.red,
+                child: Image.asset(
+                  'images/topo.png', 
+                    fit: BoxFit.cover,
+                )         
+              ),
             SizedBox(//SEPARAR BOTÕES DE LOGIN
-                  height: size.height*.22,
+                  height: size.height*.05,
                   width: size.width,
                   child:
                     Container(alignment: Alignment.bottomLeft,

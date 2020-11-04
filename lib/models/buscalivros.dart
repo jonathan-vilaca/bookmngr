@@ -1,6 +1,8 @@
-import 'package:bookmngr/services/servicesLivros.dart';
+import 'package:bookmngr/models/resultAcervo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+String pesquisa, pesquisar;
 
 // ignore: camel_case_types
 class buscalivros extends StatefulWidget {
@@ -11,8 +13,7 @@ class buscalivros extends StatefulWidget {
 // ignore: camel_case_types
 class _buscalivrosState extends State<buscalivros>{
   TextEditingController buscador = TextEditingController();
-  String pesquisa;
-
+  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;   
@@ -24,15 +25,24 @@ class _buscalivrosState extends State<buscalivros>{
         height: size.height,
         decoration: BoxDecoration(
             image: DecorationImage(
-            image: AssetImage('images/login.png'),
+            image: AssetImage('images/desfoque.png'),
             fit: BoxFit.cover,
             ),
         ),
         child: 
           Column(
             children: <Widget>[
+            Container(
+              height: size.height*.20,
+              width: size.width,
+              color: Colors.red,
+                child: Image.asset(
+                  'images/topo.png', 
+                    fit: BoxFit.cover,
+                )         
+              ),
               SizedBox(
-                  height: size.height*.23,
+                  height: size.height*.05,
                   width: size.width,
                   child:
                     Container(alignment: Alignment.bottomLeft,
@@ -47,7 +57,7 @@ class _buscalivrosState extends State<buscalivros>{
                     controller: buscador,
                     onChanged: (busca) {
                       setState(() {
-                        pesquisa = busca;
+                         pesquisa = busca;
                       });
                     },
                     decoration: 
@@ -62,75 +72,38 @@ class _buscalivrosState extends State<buscalivros>{
               height: size.height*.008,
               width: size.width
             ),
-            Container(
-              width: size.width,
-              height: size.height*.6,
-              color: Colors.red,
-              child: Scaffold(
-                backgroundColor: Colors.indigo[300],
-                body: FutureBuilder(
-                  
-                  future: buscarLivros(),
-                  builder: (_, snapshot) {
-                    var livros = snapshot.data;
-                    if(snapshot.connectionState == ConnectionState.waiting){
-                      return LinearProgressIndicator();
-                    }else{
-                      return ListView.builder(
-                        itemCount: livros.length,
-                        itemBuilder: (_, index){
-                          return
-                            ListTile(
-                              title: 
-                              ExpansionTile(
-                                title: Text(livros[index].data['titulo']),
-                                subtitle: Text('Cod: '+livros[index].data['codigo'] + 
-                              ' | Autor: '+livros[index].data['autor'],),
-                              children: [
-                                Text('Editora: '+livros[index].data['editora'] + '\n'
-                              'Gênero: '+livros[index].data['genero'] + '\n'
-                              'Ano: '+livros[index].data['ano'],),
-                              ],
-                              ),leading: Column( 
-                                children: <Widget>[
-                                  IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: (){
-                                      showCupertinoDialog(
-                                      context: context, 
-                                      builder: (context){
-                                        return CupertinoAlertDialog(
-                                          title: Text('ATENÇÃO!'),
-                                          content: Text('Deseja realmente deletar o livro?'),
-                                          actions: [
-                                            CupertinoDialogAction(child: Text('SIM'),
-                                              isDestructiveAction: true,
-                                              onPressed: (){
-                                                deletarLivro(context, livros[index], index);
-                                                setState(() {
-                                                  livros.removeAt(index);
-                                                });
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            CupertinoDialogAction(child: Text('NÃO'),
-                                              isDestructiveAction: true,
-                                              onPressed: (){
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                    })
-                                ],
-                              ),
-                            );
-                        });
-                    }
-                  }),
-              ),
-            ),
+             Container(//BOTÃO INSERIR LIVROS
+                width: size.height,
+                height: size.height * .07,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.brown[400], 
+                      Colors.brown[100]]
+                    )
+                ),
+                child:
+                  SizedBox.expand(
+                    child: FlatButton(
+                      child:
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[ 
+                            Text("PESQUISAR",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (BuildContext context) => resultadoAcervo()));
+                        }),
+                    ),
+                ),
           ],
         ),
         padding:  EdgeInsets.only(

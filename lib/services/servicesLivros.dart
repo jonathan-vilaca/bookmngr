@@ -21,18 +21,10 @@ buscarLivros() async {
     return busca.documents;
 }
 
-void deletarLivro(context, liv, position){
+deletarLivro(context, liv, position){
   db.collection('acervo').document(liv.documentID).delete(); 
 }
 
-
-listarLivros(){
-  db.collection('acervo').snapshots().listen((livros) {
-    livros.documents.forEach((liv) {
-      return liv.data;
-    });
-  });
-}
 
 updateLivro(a, s, d, g, h, j) async{
   db.collection("acervo")

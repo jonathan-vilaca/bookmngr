@@ -26,14 +26,23 @@ class _insertlivrosstate extends State<insertlivros>{
         height: size.height,
         decoration: BoxDecoration(
             image: DecorationImage(
-            image: AssetImage('images/login.png'),
+            image: AssetImage('images/desfoque.png'),
             fit: BoxFit.cover,
             ),
         ),
         child: Column(
           children: <Widget>[
+            Container(
+              height: size.height*.20,
+              width: size.width,
+              color: Colors.red,
+                child: Image.asset(
+                  'images/topo.png', 
+                    fit: BoxFit.cover,
+                )         
+              ),
             SizedBox(
-                height: size.height*.22,
+                height: size.height*.05,
               ),
             TextFormField(//Código
               onChanged: (String cod){
@@ -147,10 +156,11 @@ class _insertlivrosstate extends State<insertlivros>{
                 width: size.height,
                 height: size.height * .07,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
                   gradient: LinearGradient(
                     colors: [
-                    Colors.indigo[700], 
-                    Colors.indigo[50]]
+                      Colors.brown[400], 
+                      Colors.brown[100]]
                     )
                 ),
                 child:
