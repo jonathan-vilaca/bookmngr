@@ -112,7 +112,8 @@ class _resultadoAcervoState extends State<resultadoAcervo> {
                     }
                   }),
               )
-              )],
+              )
+              ],
           ),
           padding:  EdgeInsets.only(
             left: size.width*.03, 

@@ -1,6 +1,6 @@
-import 'package:bookmngr/models/resultAcervo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bookmngr/services/servicesLivros.dart';
 
 String pesquisa, pesquisar;
 
@@ -13,6 +13,19 @@ class buscalivros extends StatefulWidget {
 // ignore: camel_case_types
 class _buscalivrosState extends State<buscalivros>{
   TextEditingController buscador = TextEditingController();
+  List <String> livros = [];
+  List <dynamic> filteredLivros = [];
+
+  @override
+  void initState() {
+    buscarLivros().then((data) {
+      setState(() {
+        filteredLivros.addAll(data);
+        livros.addAll(data);
+      });
+    });
+    super.initState();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -56,9 +69,7 @@ class _buscalivrosState extends State<buscalivros>{
                   TextFormField(
                     controller: buscador,
                     onChanged: (busca) {
-                      setState(() {
-                         pesquisa = busca;
-                      });
+                      filterSearch(busca);
                     },
                     decoration: 
                       InputDecoration(
@@ -72,38 +83,82 @@ class _buscalivrosState extends State<buscalivros>{
               height: size.height*.008,
               width: size.width
             ),
-             Container(//BOTÃO INSERIR LIVROS
-                width: size.height,
-                height: size.height * .07,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.brown[400], 
-                      Colors.brown[100]]
-                    )
-                ),
-                child:
-                  SizedBox.expand(
-                    child: FlatButton(
-                      child:
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[ 
-                            Text("PESQUISAR",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                            ),
-                          ],
-                        ),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (BuildContext context) => resultadoAcervo()));
-                        }),
-                    ),
-                ),
+              SizedBox(
+                  height: size.height*.01,
+                  width: size.width,
+              ),
+              Container(
+              width: size.width,
+              height: size.height*.6,
+              color: Colors.white70,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: FutureBuilder(
+                  future: buscarLivros(),
+                  builder: (_, snapshot) {
+                    //var livros = snapshot.data;
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return LinearProgressIndicator();
+                    }else{
+                      return ListView.builder(
+                        itemCount: filteredLivros.length,
+                        itemBuilder: (context, index){
+                          return
+                            ListTile(
+                              //Chamar tela de atualizar livros
+                              //onLongPress: ,
+                              title: 
+                              ExpansionTile(
+                                title: Text(filteredLivros[index].data['titulo'],),
+                                subtitle: Text('Cod: '+ filteredLivros[index].data['codigo'] + 
+                              ' | Autor: '+ filteredLivros[index].data['autor'],),
+                              children: [
+                                Align(alignment: Alignment.centerLeft,
+                                child:
+                                  Text('Editora: '+ filteredLivros[index].data['editora'] + '\n'
+                                'Gênero: '+ filteredLivros[index].data['genero'] + '\n'
+                                'Ano: '+ filteredLivros[index].data['ano']),
+                                )],
+                              ),leading: Column( 
+                                children: <Widget>[
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: (){
+                                      showCupertinoDialog(
+                                      context: context, 
+                                      builder: (context){
+                                        return CupertinoAlertDialog(
+                                          title: Text('ATENÇÃO!'),
+                                          content: Text('Deseja realmente deletar o livro?'),
+                                          actions: [
+                                            CupertinoDialogAction(child: Text('SIM'),
+                                              isDestructiveAction: true,
+                                              onPressed: (){
+                                                deletarLivro(context, filteredLivros[index], index);
+                                                setState(() {
+                                                  filteredLivros.removeAt(index);
+                                                });
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            CupertinoDialogAction(child: Text('NÃO'),
+                                              isDestructiveAction: true,
+                                              onPressed: (){
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                    }),
+                                ],
+                              ),
+                            );
+                        });
+                    }
+                  }),
+              )
+              )
           ],
         ),
         padding:  EdgeInsets.only(
@@ -114,4 +169,27 @@ class _buscalivrosState extends State<buscalivros>{
         ),  
       );
     }
+
+  filterSearch(String query) {
+    List<String> searchList = List<dynamic>();
+    searchList.addAll(livros);
+    if (query.isNotEmpty) {
+      List<String> resultListData = List<dynamic>();
+      searchList.forEach((item) {
+        if (item.contains(query)) {
+          resultListData.add(item);
+        }
+      });
+      setState(() {
+        filteredLivros.clear();
+        filteredLivros.addAll(resultListData);
+      });
+      return;
+    } else {
+      setState(() {
+        filteredLivros.clear();
+        filteredLivros.addAll(livros);
+      });
+    }
+  }
   }
