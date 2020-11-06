@@ -14,7 +14,7 @@ class insertlivros extends StatefulWidget {
 // ignore: camel_case_types
 class _insertlivrosstate extends State<insertlivros>{
 
-  String codigo, titulo, genero, editora, autor, ano, exemplares;
+  String codigo = '', titulo = '', genero = '', editora = '', autor = '', ano = '', exemplares = '';
   @override
   Widget build(BuildContext context) {    
     var size = MediaQuery.of(context).size;
@@ -150,9 +150,9 @@ class _insertlivrosstate extends State<insertlivros>{
                   keyboardType: TextInputType.number,
             ),
               SizedBox(
-                height: size.height*.03,
+                height: size.height*.015,
               ),
-            Container(//BOTÃO INSERIR LIVROS
+            Container(//BOTÃO CADASTRAR LIVROS
                 width: size.height,
                 height: size.height * .07,
                 decoration: BoxDecoration(
@@ -179,17 +179,56 @@ class _insertlivrosstate extends State<insertlivros>{
                           ],
                         ),
                         onPressed: () {
-                          if((codigo.length > 0) && (codigo != null)){
-                              insertLivro(codigo, titulo, genero, editora, autor, ano);
-                              Fluttertoast.showToast(
-                                msg: "LIVRO CADASTRADO COM SUCESSO!",
-                                toastLength: Toast.LENGTH_SHORT);
-                                clearTextInput();
+                          if((codigo.length > 0) && (codigo != null) &&
+                          (titulo.length > 0) && (titulo != null) &&
+                          (genero.length > 0) && (genero != null) &&
+                          (editora.length > 0) && (editora != null) &&
+                          (autor.length > 0) && (autor != null) &&
+                          (ano.length > 0) && (ano != null)){
+                            insertLivro(codigo, titulo, genero, editora, autor, ano);
+                            Fluttertoast.showToast(
+                              msg: "LIVRO CADASTRADO COM SUCESSO!",
+                              toastLength: Toast.LENGTH_SHORT);
+                              clearTextInput();
                           }else{
                             Fluttertoast.showToast(
                               msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
                               toastLength: Toast.LENGTH_SHORT);
                           }
+                        }),
+                    ),
+                ),
+              SizedBox(
+                height: size.height*.01,
+              ),
+              Container(//BOTÃO LIMPAR
+                width: size.height,
+                height: size.height * .07,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.brown[400], 
+                      Colors.brown[100]]
+                    )
+                ),
+                child:
+                  SizedBox.expand(
+                    child: FlatButton(
+                      child:
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[ 
+                            Text("LIMPAR",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          clearTextInput();                
                         }),
                     ),
                 ),

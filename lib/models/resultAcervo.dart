@@ -59,16 +59,20 @@ class _resultadoAcervoState extends State<resultadoAcervo> {
                         itemBuilder: (_, index){
                           return
                             ListTile(
+                              //Chamar tela de atualizar livros
+                              //onLongPress: ,
                               title: 
                               ExpansionTile(
                                 title: Text(livros[index].data['titulo'],),
                                 subtitle: Text('Cod: '+livros[index].data['codigo'] + 
                               ' | Autor: '+livros[index].data['autor'],),
                               children: [
-                                Text('Editora: '+livros[index].data['editora'] + '\n'
-                              'Gênero: '+livros[index].data['genero'] + '\n'
-                              'Ano: '+livros[index].data['ano'],),
-                              ],
+                                Align(alignment: Alignment.centerLeft,
+                                child:
+                                  Text('Editora: '+livros[index].data['editora'] + '\n'
+                                'Gênero: '+livros[index].data['genero'] + '\n'
+                                'Ano: '+livros[index].data['ano']),
+                                )],
                               ),leading: Column( 
                                 children: <Widget>[
                                   IconButton(
