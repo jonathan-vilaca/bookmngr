@@ -23,7 +23,7 @@ class biblioopcoes extends StatelessWidget {
             Container(
               height: size.height*.20,
               width: size.width,
-              color: Colors.red,
+              color: Colors.indigo,
                 child: Image.asset(
                   'images/topo.png', 
                     fit: BoxFit.cover,

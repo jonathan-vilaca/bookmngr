@@ -55,7 +55,7 @@ class _buscalivrosState extends State<buscalivros>{
                 )         
               ),
               SizedBox(
-                  height: size.height*.05,
+                  height: size.height*.035,
                   width: size.width,
                   child:
                     Container(alignment: Alignment.bottomLeft,
@@ -109,7 +109,8 @@ class _buscalivrosState extends State<buscalivros>{
                               //onLongPress: ,
                               title: 
                               ExpansionTile(
-                                title: Text(filteredLivros[index].data['titulo'],),
+                                title: Text(filteredLivros[index].data['titulo'],
+                                  style: TextStyle(fontWeight: FontWeight.bold)),
                                 subtitle: Text('Cod: '+ filteredLivros[index].data['codigo'] + 
                               ' | Autor: '+ filteredLivros[index].data['autor'],),
                               children: [
@@ -165,10 +166,11 @@ class _buscalivrosState extends State<buscalivros>{
           left: size.width*.05, 
           right: size.width*.05,
           top: size.height*.03,
-          bottom: size.height*.02),
+          bottom: size.height*.03),
         ),  
       );
     }
+
 
   filterSearch(String query) {
     List<String> searchList = List<dynamic>();
@@ -192,4 +194,4 @@ class _buscalivrosState extends State<buscalivros>{
       });
     }
   }
-  }
+}
