@@ -150,48 +150,48 @@ class biblioopcoes extends StatelessWidget {
              Row(//2 botões
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-               Card(
-                 color: Colors.transparent,
-                 semanticContainer: true,
-                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                 child: Column(
-                   children: <Widget>[
-                     GestureDetector(
-                       child: Image.asset(
-                        'images/3.png', 
-                         width: size.width*.4,
-                         height: size.width*.4,
-                         fit: BoxFit.cover,
-                        // color: Colors.white70,
-                         ),
-                         onTap: () {
+              //  Card(
+              //    color: Colors.transparent,
+              //    semanticContainer: true,
+              //    clipBehavior: Clip.antiAliasWithSaveLayer,
+              //    child: Column(
+              //      children: <Widget>[
+              //        GestureDetector(
+              //          child: Image.asset(
+              //           'images/3.png', 
+              //            width: size.width*.4,
+              //            height: size.width*.4,
+              //            fit: BoxFit.cover,
+              //           // color: Colors.white70,
+              //            ),
+              //            onTap: () {
  
-                         },
-                     )
-                   ],
-                 ),
-                ),
-                Card(
-                  color: Colors.transparent,
-                 semanticContainer: true,
-                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                 child: Column(
-                   children: <Widget>[
-                     GestureDetector(
-                       child: Image.asset(
-                        'images/3.png', 
-                         width: size.width*.4,
-                         height: size.width*.4,
-                         fit: BoxFit.cover,
-                         //color: Colors.white70,
-                         ),
-                         onTap: () {
+              //            },
+              //        )
+              //      ],
+              //    ),
+              //   ),
+              //   Card(
+              //     color: Colors.transparent,
+              //    semanticContainer: true,
+              //    clipBehavior: Clip.antiAliasWithSaveLayer,
+              //    child: Column(
+              //      children: <Widget>[
+              //        GestureDetector(
+              //          child: Image.asset(
+              //           'images/3.png', 
+              //            width: size.width*.4,
+              //            height: size.width*.4,
+              //            fit: BoxFit.cover,
+              //            //color: Colors.white70,
+              //            ),
+              //            onTap: () {
                            
-                         },
-                     )
-                   ],
-                 ),
-                ),
+              //            },
+              //        )
+              //      ],
+              //    ),
+              //   ),
               ],
             ),
           ],

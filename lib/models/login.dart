@@ -23,8 +23,8 @@ class _loginState extends State<login> {
     try{
       login = true;
       await _googleSignIn.signIn();
-    }catch(err){
-      print(err);
+    }catch(error){
+      print(error);
     }
   }
 

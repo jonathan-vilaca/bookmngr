@@ -13,18 +13,17 @@ class buscalivros extends StatefulWidget {
 // ignore: camel_case_types
 class _buscalivrosState extends State<buscalivros>{
   TextEditingController buscador = TextEditingController();
-  List <String> livros = [];
+
   List <dynamic> filteredLivros = [];
 
   @override
   void initState() {
-    buscarLivros().then((data) {
+    buscarLivros().then((data) async {
       setState(() {
         filteredLivros.addAll(data);
-        livros.addAll(data);
+        super.initState();
       });
     });
-    super.initState();
   }
   
   @override
@@ -105,8 +104,6 @@ class _buscalivrosState extends State<buscalivros>{
                         itemBuilder: (context, index){
                           return
                             ListTile(
-                              //Chamar tela de atualizar livros
-                              //onLongPress: ,
                               title: 
                               ExpansionTile(
                                 title: Text(filteredLivros[index].data['titulo'],
@@ -173,13 +170,14 @@ class _buscalivrosState extends State<buscalivros>{
 
 
   filterSearch(String query) {
-    List<String> searchList = List<dynamic>();
-    searchList.addAll(livros);
-    if (query.isNotEmpty) {
+    List<dynamic> searchList = List<String>();
+    searchList.addAll(filteredLivros);
+    if (query != null) {
       List<String> resultListData = List<dynamic>();
       searchList.forEach((item) {
         if (item.contains(query)) {
           resultListData.add(item);
+          print(query);
         }
       });
       setState(() {
@@ -190,7 +188,7 @@ class _buscalivrosState extends State<buscalivros>{
     } else {
       setState(() {
         filteredLivros.clear();
-        filteredLivros.addAll(livros);
+        filteredLivros.addAll(filteredLivros);
       });
     }
   }
