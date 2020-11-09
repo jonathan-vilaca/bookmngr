@@ -40,7 +40,7 @@ class Livro{
   }
 
   Livro.fromMap(Map<String, dynamic> map, String codigo){
-    this._codigo = codigo ?? '';
+    this._codigo = map['codigo'];
     this._ano = map['ano'];
     this._autor = map['autor'];
     this._editora = map['editora'];

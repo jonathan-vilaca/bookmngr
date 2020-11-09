@@ -15,13 +15,12 @@ insertLivro(a, s, d, g, h, j) async{
       });
 }
 
-buscarLivros() async {
-  QuerySnapshot busca = 
-    await db.collection("acervo").getDocuments();
-    return busca.documents;
+Stream<QuerySnapshot> buscarLivros() {
+  return db.collection('acervo')
+    .snapshots();
 }
 
-deletarLivro(context, liv, position){
+deletarLivro(context, liv, position) async {
   db.collection('acervo').document(liv.documentID).delete(); 
 }
 
