@@ -1,3 +1,8 @@
+import 'dart:async';
+
+import 'package:bookmngr/services/classeLivros.dart';
+import 'package:bookmngr/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bookmngr/services/servicesLivros.dart';
@@ -14,20 +19,50 @@ class buscalivros extends StatefulWidget {
 class _buscalivrosState extends State<buscalivros>{
   TextEditingController buscador = TextEditingController();
 
-  List <dynamic> filteredLivros = [];
+  List <Livro> listaLivros = [];
+  List <dynamic> livrosFiltrados = [];
+  StreamSubscription<QuerySnapshot> listaInicial;
 
   @override
   void initState() {
-    buscarLivros().then((data) async {
-      setState(() {
-        filteredLivros.addAll(data);
-        super.initState();
+     listaLivros = List();
+     listaInicial?.cancel();
+     listaInicial = 
+     db.collection("acervo").snapshots().listen((snapshot) {
+        List<Livro> livros = snapshot.documents
+          .map(
+            (documentSnapshot) => Livro.fromMap(
+                documentSnapshot.data, 
+                documentSnapshot.documentID),
+          ).toList();
+          buscador.addListener(() {
+            filterSearch();
+          });
+           setState(() {
+             this.listaLivros = livros;
+           });
+     });
+     super.initState();
+  }
+
+  filterSearch() {
+    List <Livro> _livros = [];
+    _livros.addAll(listaLivros);
+    if(buscador.text.isNotEmpty){
+      _livros.retainWhere((busca){
+        String searchLivro = buscador.text.toLowerCase();
+        String tituloLivro = busca.titulo.toLowerCase();
+        return tituloLivro.contains(searchLivro);
       });
-    });
+      setState(() {
+          livrosFiltrados = _livros;
+      });
+    }
   }
   
   @override
   Widget build(BuildContext context) {
+    bool isSearching = buscador.text.isNotEmpty;
     var size = MediaQuery.of(context).size;   
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -66,9 +101,10 @@ class _buscalivrosState extends State<buscalivros>{
                     ), 
                 ),
                   TextFormField(
+                    autofocus: true,
                     controller: buscador,
-                    onChanged: (busca) {
-                      filterSearch(busca);
+                    onChanged: (String busca) {
+                      filterSearch();
                     },
                     decoration: 
                       InputDecoration(
@@ -92,32 +128,35 @@ class _buscalivrosState extends State<buscalivros>{
               color: Colors.white70,
               child: Scaffold(
                 backgroundColor: Colors.transparent,
-                body: FutureBuilder(
-                  future: buscarLivros(),
+                body: StreamBuilder<QuerySnapshot>(
+                  stream: buscarLivros(),
                   builder: (_, snapshot) {
-                    //var livros = snapshot.data;
                     if(snapshot.connectionState == ConnectionState.waiting){
                       return LinearProgressIndicator();
                     }else{
+                      List<DocumentSnapshot> listagemLivros =
+                    snapshot.data.documents;
                       return ListView.builder(
-                        itemCount: filteredLivros.length,
+                        shrinkWrap: true,
+                        itemCount: isSearching == true? livrosFiltrados.length : listaLivros.length,
                         itemBuilder: (context, index){
                           return
                             ListTile(
                               title: 
                               ExpansionTile(
-                                title: Text(filteredLivros[index].data['titulo'],
+                                title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
                                   style: TextStyle(fontWeight: FontWeight.bold)),
-                                subtitle: Text('Cod: '+ filteredLivros[index].data['codigo'] + 
-                              ' | Autor: '+ filteredLivros[index].data['autor'],),
+                                subtitle: Text('Cod: '+ listaLivros[index].codigo + '\n'
+                              'Autor: '+ listaLivros[index].autor,),
                               children: [
                                 Align(alignment: Alignment.centerLeft,
                                 child:
-                                  Text('Editora: '+ filteredLivros[index].data['editora'] + '\n'
-                                'Gênero: '+ filteredLivros[index].data['genero'] + '\n'
-                                'Ano: '+ filteredLivros[index].data['ano']),
+                                  Text('Editora: '+ listaLivros[index].editora + '\n'
+                                'Gênero: '+ listaLivros[index].genero + '\n'
+                                'Ano: '+ listaLivros[index].ano),
                                 )],
-                              ),leading: Column( 
+                              ),
+                              leading: Column(
                                 children: <Widget>[
                                   IconButton(
                                     icon: const Icon(Icons.delete),
@@ -132,9 +171,9 @@ class _buscalivrosState extends State<buscalivros>{
                                             CupertinoDialogAction(child: Text('SIM'),
                                               isDestructiveAction: true,
                                               onPressed: (){
-                                                deletarLivro(context, filteredLivros[index], index);
+                                                deletarLivro(context, listagemLivros[index], index);
                                                 setState(() {
-                                                  filteredLivros.removeAt(index);
+                                                  listagemLivros.removeAt(index);
                                                 });
                                                 Navigator.pop(context);
                                               },
@@ -167,29 +206,4 @@ class _buscalivrosState extends State<buscalivros>{
         ),  
       );
     }
-
-
-  filterSearch(String query) {
-    List<dynamic> searchList = List<String>();
-    searchList.addAll(filteredLivros);
-    if (query != null) {
-      List<String> resultListData = List<dynamic>();
-      searchList.forEach((item) {
-        if (item.contains(query)) {
-          resultListData.add(item);
-          print(query);
-        }
-      });
-      setState(() {
-        filteredLivros.clear();
-        filteredLivros.addAll(resultListData);
-      });
-      return;
-    } else {
-      setState(() {
-        filteredLivros.clear();
-        filteredLivros.addAll(filteredLivros);
-      });
-    }
-  }
 }

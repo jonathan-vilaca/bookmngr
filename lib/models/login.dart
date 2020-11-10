@@ -69,7 +69,7 @@ class _loginState extends State<login> {
                         width: size.width * .5,
                         height: size.width * .5,                        
                          fit: BoxFit.cover,
-                         ),
+                    ),
                   ),
                 ],
               ),
@@ -90,8 +90,7 @@ class _loginState extends State<login> {
                 TextField(//USUARIO                                
                   onChanged: (String user){
                     usuario = user;
-                  },
-                  
+                  },                 
                   decoration:
                     InputDecoration(
                       labelText: 'Usuário',
@@ -99,7 +98,6 @@ class _loginState extends State<login> {
                       prefixIcon: Icon(Icons.account_box),
                       filled: true,
                       fillColor: Colors.white70,
-
                  ),
                 ),
               SizedBox(
