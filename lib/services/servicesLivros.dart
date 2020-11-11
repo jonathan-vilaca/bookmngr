@@ -1,9 +1,9 @@
 import 'package:bookmngr/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-insertLivro(a, s, d, g, h, j) async{
+insertLivro(a, s, d, g, h, j, k) async{
   db.collection("acervo")
-    .document(s)
+    .document(a)
       .setData(
       {
         "codigo":a,
@@ -12,6 +12,7 @@ insertLivro(a, s, d, g, h, j) async{
         "editora":g,
         "autor":h,
         "ano":j,
+        "disponivel":k
       });
 }
 

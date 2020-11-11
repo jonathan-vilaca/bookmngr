@@ -11,10 +11,13 @@ class insertlivros extends StatefulWidget {
   _insertlivrosstate createState() => _insertlivrosstate();
 }
 
+
 // ignore: camel_case_types
 class _insertlivrosstate extends State<insertlivros>{
+  bool state = true;
+  String codigo = '', titulo = '', genero = '', editora = '', 
+        autor = '', ano = '', exemplares = '', disponivel = '';
 
-  String codigo = '', titulo = '', genero = '', editora = '', autor = '', ano = '', exemplares = '';
   @override
   Widget build(BuildContext context) {    
     var size = MediaQuery.of(context).size;
@@ -33,7 +36,7 @@ class _insertlivrosstate extends State<insertlivros>{
         child: Column(
           children: <Widget>[
             Container(
-              height: size.height*.20,
+              height: size.height*.15,
               width: size.width,
               color: Colors.red,
                 child: Image.asset(
@@ -41,8 +44,34 @@ class _insertlivrosstate extends State<insertlivros>{
                     fit: BoxFit.cover,
                 )         
               ),
-            SizedBox(
-                height: size.height*.05,
+              SizedBox(//SEPARADOR DE TEXTFIELD
+                height: size.height*.008,
+                width: size.width
+              ),
+            Container(
+              color: Colors.white70,
+              height: size.height*.05,
+              child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                        Text("DISPONIBILIDADE",style: TextStyle(color: Colors.black87)),
+                    Switch(
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      inactiveTrackColor: Colors.redAccent,
+                      value: state, 
+                      onChanged: (bool value){
+                        setState(() {
+                          state = value;
+                        });        
+                      }),
+                  ],
+                ), 
+              ),
+              SizedBox(//SEPARADOR DE TEXTFIELD
+                height: size.height*.008,
+                width: size.width
               ),
             TextFormField(//Código
               onChanged: (String cod){
@@ -148,7 +177,7 @@ class _insertlivrosstate extends State<insertlivros>{
                     fillColor: Colors.white70,
                   ),
                   keyboardType: TextInputType.number,
-            ),
+            ),           
               SizedBox(
                 height: size.height*.015,
               ),
@@ -185,7 +214,12 @@ class _insertlivrosstate extends State<insertlivros>{
                           (editora.length > 0) && (editora != null) &&
                           (autor.length > 0) && (autor != null) &&
                           (ano.length > 0) && (ano != null)){
-                            insertLivro(codigo, titulo, genero, editora, autor, ano);
+                            if (state == true){
+                              disponivel = 'Disponível!';
+                            }else{
+                              disponivel = 'Não disponível!';
+                            }
+                            insertLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
                             Fluttertoast.showToast(
                               msg: "LIVRO CADASTRADO COM SUCESSO!",
                               toastLength: Toast.LENGTH_SHORT);
@@ -195,6 +229,9 @@ class _insertlivrosstate extends State<insertlivros>{
                               msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
                               toastLength: Toast.LENGTH_SHORT);
                           }
+                          setState(() {
+                            state = true;
+                          });
                         }),
                     ),
                 ),
@@ -228,7 +265,10 @@ class _insertlivrosstate extends State<insertlivros>{
                           ],
                         ),
                         onPressed: () {
-                          clearTextInput();                
+                          clearTextInput();
+                          setState(() {
+                            state = true; 
+                          });               
                         }),
                     ),
                 ),

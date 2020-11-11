@@ -147,7 +147,7 @@ class _buscalivrosState extends State<buscalivros>{
                                 title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
                                   style: TextStyle(fontWeight: FontWeight.bold)),
                                 subtitle: Text('Cod: '+ listaLivros[index].codigo + '\n'
-                              'Autor: '+ listaLivros[index].autor,),
+                              'Autor: '+ listaLivros[index].autor),
                               children: [
                                 Align(alignment: Alignment.centerLeft,
                                 child:
