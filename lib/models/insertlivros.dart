@@ -217,7 +217,7 @@ class _insertlivrosstate extends State<insertlivros>{
                             if (state == true){
                               disponivel = 'Disponível!';
                             }else{
-                              disponivel = 'Não disponível!';
+                              disponivel = 'Indisponível!';
                             }
                             insertLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
                             Fluttertoast.showToast(
