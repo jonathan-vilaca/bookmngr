@@ -210,9 +210,9 @@ class _loginState extends State<login> {
           padding:  EdgeInsets.only(
             left: size.width*.05, 
             right: size.width*.05,
-            top: size.height*.03,
-            bottom: size.height*.01),
-      ),
+            top: size.height*.05,
+            bottom: size.height*.03),
+        ),
     );
   }
 }
