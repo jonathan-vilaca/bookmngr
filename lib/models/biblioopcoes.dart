@@ -30,7 +30,7 @@ class biblioopcoes extends StatelessWidget {
                 )         
               ),
             SizedBox(//SEPARAR BOTÕES DE LOGIN
-                  height: size.height*.05,
+                  height: size.height*.1,
                   width: size.width,
                   child:
                     Container(alignment: Alignment.bottomLeft,
@@ -53,11 +53,10 @@ class biblioopcoes extends StatelessWidget {
                    children: <Widget>[
                      GestureDetector(
                        child: Image.asset(
-                        'images/cadastrar.png', 
+                        'images/livro (2).png', 
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.white70,
                          ),
                          onTap: () {
                           Navigator.push(context, MaterialPageRoute(
@@ -76,11 +75,10 @@ class biblioopcoes extends StatelessWidget {
                    children: <Widget>[
                      GestureDetector(
                        child: Image.asset(
-                        'images/comprasicon.png', 
+                        'images/livro (3).png', 
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.white70,
                          ),
                          onTap: () {
                            launchURL();
@@ -106,11 +104,10 @@ class biblioopcoes extends StatelessWidget {
                    children: <Widget>[
                      GestureDetector(
                        child: Image.asset(
-                        'images/emprestar.png', 
+                        'images/livro (1).png', 
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.white70,
                          ),
                          onTap: () {
                             Navigator.push(context, MaterialPageRoute(
@@ -129,11 +126,10 @@ class biblioopcoes extends StatelessWidget {
                    children: <Widget>[
                      GestureDetector(
                        child: Image.asset(
-                        'images/doar.png', 
+                        'images/livro (5).png', 
                          width: size.width*.4,
                          height: size.width*.4,
                          fit: BoxFit.cover,
-                         color: Colors.white70,
                          ),
                          onTap: () {
                            
