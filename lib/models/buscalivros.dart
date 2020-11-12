@@ -39,6 +39,7 @@ class _buscalivrosState extends State<buscalivros>{
             filterSearch();
           });
            setState(() {
+
              this.listaLivros = livros;
            });
      });
@@ -53,9 +54,14 @@ class _buscalivrosState extends State<buscalivros>{
         String searchLivro = buscador.text.toLowerCase();
         String tituloLivro = busca.titulo.toLowerCase();
         return tituloLivro.contains(searchLivro);
+
       });
       setState(() {
           livrosFiltrados = _livros;
+      });
+    }if(buscador.text.isEmpty){
+      setState(() {
+        return listaLivros;
       });
     }
   }
@@ -80,7 +86,7 @@ class _buscalivrosState extends State<buscalivros>{
           Column(
             children: <Widget>[
             Container(
-              height: size.height*.20,
+              height: size.height*.15,
               width: size.width,
               color: Colors.red,
                 child: Image.asset(
@@ -146,13 +152,14 @@ class _buscalivrosState extends State<buscalivros>{
                               ExpansionTile(
                                 title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
                                   style: TextStyle(fontWeight: FontWeight.bold)),
-                                subtitle: Text('Cod: '+ listaLivros[index].codigo + '\n'
-                              'Autor: '+ listaLivros[index].autor + '\n'
-                             'DIsponibilidade: ' + listagemLivros[index]['disponivel']),
+                                subtitle: Text(listagemLivros[index]['disponivel']),
                               children: [
                                 Align(alignment: Alignment.centerLeft,
                                 child:
-                                  Text('Editora: '+ listaLivros[index].editora + '\n'
+                                  Text(
+                                      'Cod: '+ listaLivros[index].codigo + '\n'
+                                    'Autor: '+ listaLivros[index].autor + '\n'
+                                  'Editora: '+ listaLivros[index].editora + '\n'
                                 'Gênero: '+ listaLivros[index].genero + '\n'
                                 'Ano: '+ listaLivros[index].ano),
                                 )],

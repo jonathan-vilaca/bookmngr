@@ -21,7 +21,7 @@ class biblioopcoes extends StatelessWidget {
         Column(
           children: <Widget>[
             Container(
-              height: size.height*.20,
+              height: size.height*.15,
               width: size.width,
               color: Colors.indigo,
                 child: Image.asset(
