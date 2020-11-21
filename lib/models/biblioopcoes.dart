@@ -75,7 +75,7 @@ class biblioopcoes extends StatelessWidget {
                         ],
                       ),
                     ),
-                                     FlatButton(
+                    FlatButton(
                       padding: EdgeInsets.only(
                         left: size.width*.005, 
                         right: size.width*.005,
@@ -83,8 +83,7 @@ class biblioopcoes extends StatelessWidget {
                         bottom: size.height*.005),
                       color: Colors.transparent,
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => insertlivros()));
+                        launchURL();
                       },                   
                       child: Column(
                         children: <Widget>[
@@ -116,7 +115,7 @@ class biblioopcoes extends StatelessWidget {
                       color: Colors.transparent,
                       onPressed: (){
                         Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => insertlivros()));
+                          builder: (BuildContext context) => buscalivros()));
                       },                   
                       child: Column(
                         children: <Widget>[
@@ -139,8 +138,7 @@ class biblioopcoes extends StatelessWidget {
                         bottom: size.height*.005),
                       color: Colors.transparent,
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => insertlivros()));
+
                       },                   
                       child: Column(
                         children: <Widget>[
