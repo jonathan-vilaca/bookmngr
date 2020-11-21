@@ -1,9 +1,11 @@
 import 'package:bookmngr/models/biblioopcoes.dart';
+import 'package:bookmngr/services/loginEmail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 // ignore: camel_case_types
@@ -147,8 +149,7 @@ class _loginState extends State<login> {
                             ],
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) => biblioopcoes()));
+                            doLogin(context, usuario, senha);
                           }),
                       ),
                   ),
