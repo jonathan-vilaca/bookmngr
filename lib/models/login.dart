@@ -149,7 +149,7 @@ class _loginState extends State<login> {
                             ],
                           ),
                           onPressed: () {
-                            doLogin(context, usuario, senha);
+                            doLogin(context, usuario.trim().toLowerCase(), senha.trim().toLowerCase());
                           }),
                       ),
                   ),
