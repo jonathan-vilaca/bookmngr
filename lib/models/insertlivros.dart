@@ -210,11 +210,11 @@ class _insertlivrosstate extends State<insertlivros>{
                           ),
                           onPressed: () {
                             if((codigo.length > 0) && (codigo != null) &&
-                            (titulo.length > 0) && (titulo != null) &&
-                            (genero.length > 0) && (genero != null) &&
-                            (editora.length > 0) && (editora != null) &&
-                            (autor.length > 0) && (autor != null) &&
-                            (ano.length > 0) && (ano != null)){
+                              (titulo.length > 0) && (titulo != null) &&
+                              (genero.length > 0) && (genero != null) &&
+                              (editora.length > 0) && (editora != null) &&
+                              (autor.length > 0) && (autor != null) &&
+                              (ano.length > 0) && (ano != null)){
                               if (state == true){
                                 disponivel = 'Disponível!';
                               }else{
