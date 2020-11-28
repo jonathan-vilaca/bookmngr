@@ -1,19 +1,27 @@
+import 'package:bookmngr/models/limparTextField.dart';
 import 'package:bookmngr/services/servicesLivros.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'limparTextField.dart';
 
 // ignore: camel_case_types
-class insertlivros extends StatefulWidget {
+class UpdateLivros extends StatefulWidget {
   @override
-  _insertlivrosstate createState() => _insertlivrosstate();
+  _updateLivrosstate createState() => _updateLivrosstate();
 }
 
+  var cod2 = TextEditingController();
+  var liv2 = TextEditingController();
+  var gen2 = TextEditingController();
+  var edi2 = TextEditingController();
+  var aut2 = TextEditingController();
+  var anoLa2 = TextEditingController();
 
 // ignore: camel_case_types
-class _insertlivrosstate extends State<insertlivros>{
+class _updateLivrosstate extends State<UpdateLivros>{
+
+
   bool state = true;
   String codigo = '', titulo = '', genero = '', editora = '', 
         autor = '', ano = '', exemplares = '', disponivel = '';
@@ -78,7 +86,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String cod){
                   codigo = cod;
                 },
-                  controller: cod,
+                  controller: cod2,
                   decoration:
                     InputDecoration(
                       labelText: 'Código do livro',
@@ -96,7 +104,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String tit){
                   titulo = tit;
                 },
-                  controller: liv,
+                  controller: liv2,
                   decoration: 
                     InputDecoration(
                       labelText: 'Título do livro',
@@ -114,7 +122,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String gen){
                   genero = gen;
                 },
-                  controller: gen,
+                  controller: gen2,
                   decoration: 
                     InputDecoration(
                       labelText: 'Gênero',
@@ -132,7 +140,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String edi){
                   editora = edi;
                 },
-                  controller: edi,
+                  controller: edi2,
                   decoration: 
                     InputDecoration(
                       labelText: 'Editora',
@@ -150,7 +158,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String aut){
                   autor = aut;
                 },
-                  controller: aut,
+                  controller: aut2,
                   decoration: 
                     InputDecoration(
                       labelText: 'Autor',
@@ -168,7 +176,7 @@ class _insertlivrosstate extends State<insertlivros>{
                 onChanged: (String lancamento){
                   ano = lancamento;
                 },
-                  controller: anoLa,
+                  controller: anoLa2,
                   decoration: 
                     InputDecoration(
                       labelText: 'Ano de lançamento',
@@ -200,7 +208,7 @@ class _insertlivrosstate extends State<insertlivros>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[ 
-                              Text("CADASTRAR LIVRO",
+                              Text("ATUALIZAR LIVRO",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -220,11 +228,10 @@ class _insertlivrosstate extends State<insertlivros>{
                               }else{
                                 disponivel = 'Indisponível!';
                               }
-                              insertLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
+                              updateLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
                               Fluttertoast.showToast(
-                                msg: "LIVRO CADASTRADO COM SUCESSO!",
+                                msg: "LIVRO ATUALIZADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
-                                clearTextInputCreate();
                             }else{
                               Fluttertoast.showToast(
                                 msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
@@ -266,8 +273,8 @@ class _insertlivrosstate extends State<insertlivros>{
                             ],
                           ),
                           onPressed: () {
-                            clearTextInputCreate();
                             setState(() {
+                              limparTextfieldsUpdate();
                               state = true; 
                             });               
                           }),
@@ -284,4 +291,34 @@ class _insertlivrosstate extends State<insertlivros>{
         ),    
     );
   }
+}
+
+chamarTelaCadastro(context, cod, tit, gen, edi, aut, ano){
+
+  Navigator.push(context, MaterialPageRoute(
+                          builder: (BuildContext context) => UpdateLivros()));
+
+  String codigo = cod;
+  String titulo = tit;
+  String genero = gen;
+  String editora = edi;
+  String autor = aut;
+  String anoLa = ano;
+
+  cod2.text = codigo;
+  liv2.text = titulo;
+  gen2.text = genero;
+  edi2.text = editora;
+  aut2.text = autor;
+  anoLa2.text = anoLa;
+
+}
+
+limparTextfieldsUpdate(){
+  cod2.clear();
+  liv2.clear();
+  gen2.clear();
+  edi2.clear();
+  aut2.clear();
+  anoLa2.clear();
 }

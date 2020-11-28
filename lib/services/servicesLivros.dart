@@ -26,7 +26,7 @@ deletarLivro(context, liv, position) async {
 }
 
 
-updateLivro(a, s, d, g, h, j) async{
+updateLivro(a, s, d, g, h, j, k) async{
   db.collection("acervo")
     .document(s)
       .updateData(
@@ -37,5 +37,6 @@ updateLivro(a, s, d, g, h, j) async{
         "editora":g,
         "autor":h,
         "ano":j,
+        "disponivel":k
       });
 }
