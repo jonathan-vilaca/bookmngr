@@ -1,22 +1,23 @@
 import 'dart:async';
-
+import 'package:bookmngr/models/updateLivros.dart';
 import 'package:bookmngr/services/classeLivros.dart';
 import 'package:bookmngr/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bookmngr/services/servicesLivros.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 String pesquisa, pesquisar;
 
 // ignore: camel_case_types
-class buscalivros extends StatefulWidget {
+class Buscalivros extends StatefulWidget {
   @override
   _buscalivrosState createState() => _buscalivrosState();
 }
 
 // ignore: camel_case_types
-class _buscalivrosState extends State<buscalivros>{
+class _buscalivrosState extends State<Buscalivros>{
   TextEditingController buscador = TextEditingController();
 
   List <Livro> listaLivros = [];
@@ -87,7 +88,7 @@ class _buscalivrosState extends State<buscalivros>{
             top: size.height*.05),
             child:
               SingleChildScrollView(
-                              child: Column(
+                child: Column(
                   children: <Widget>[
                   Container(
                     height: size.height*.15,
@@ -152,11 +153,20 @@ class _buscalivrosState extends State<buscalivros>{
                               itemBuilder: (context, index){
                                 return
                                   ListTile(
+                                    onLongPress: () {                                                         
+                                       chamarTelaCadastro(context,
+                                        listaLivros[index].codigo, 
+                                        livrosFiltrados[index].titulo, 
+                                        listaLivros[index].genero, 
+                                        listaLivros[index].editora, 
+                                        listaLivros[index].autor, 
+                                        listaLivros[index].ano);
+                                    },
                                     title: 
                                     ExpansionTile(
                                       title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
                                         style: TextStyle(fontWeight: FontWeight.bold)),
-                                      subtitle: Text(listagemLivros[index]['disponivel']),
+                                          subtitle: Text(listagemLivros[index]['disponivel']),
                                     children: [
                                       Align(alignment: Alignment.centerLeft,
                                       child:

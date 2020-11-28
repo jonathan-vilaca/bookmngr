@@ -115,7 +115,7 @@ class biblioopcoes extends StatelessWidget {
                       color: Colors.transparent,
                       onPressed: (){
                         Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => buscalivros()));
+                          builder: (BuildContext context) => Buscalivros()));
                       },                   
                       child: Column(
                         children: <Widget>[
