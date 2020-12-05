@@ -2,6 +2,7 @@ import 'package:bookmngr/services/linkAmazon.dart';
 import 'package:bookmngr/models/buscalivros.dart';
 import 'package:bookmngr/models/insertlivros.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: camel_case_types
 class biblioopcoes extends StatelessWidget {
@@ -9,7 +10,7 @@ class biblioopcoes extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -138,7 +139,9 @@ class biblioopcoes extends StatelessWidget {
                         bottom: size.height*.005),
                       color: Colors.transparent,
                       onPressed: (){
-
+                        Fluttertoast.showToast(
+                          msg: "Em breve...",
+                          toastLength: Toast.LENGTH_SHORT);
                       },                   
                       child: Column(
                         children: <Widget>[

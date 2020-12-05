@@ -2,8 +2,9 @@ import 'package:bookmngr/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 insertLivro(a, s, d, g, h, j, k) async{
+  String livro = a;
   db.collection("acervo")
-    .document(a)
+    .document(livro)
       .setData(
       {
         "codigo":a,
@@ -26,9 +27,10 @@ deletarLivro(context, liv, position) async {
 }
 
 
-updateLivro(a, s, d, g, h, j, k) async{
+Future updateLivro(a, s, d, g, h, j, k) async{
+  String livro = a;
   db.collection("acervo")
-    .document(s)
+    .document(livro)
       .updateData(
       {
         "codigo":a,

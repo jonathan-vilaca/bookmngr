@@ -11,13 +11,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 String pesquisa, pesquisar;
 
 // ignore: camel_case_types
-class Buscalivros extends StatefulWidget {
+class Buscalivros_leitor extends StatefulWidget {
   @override
-  _buscalivrosState createState() => _buscalivrosState();
+  _buscalivrosleitorState createState() => _buscalivrosleitorState();
 }
 
 // ignore: camel_case_types
-class _buscalivrosState extends State<Buscalivros>{
+class _buscalivrosleitorState extends State<Buscalivros_leitor>{
   TextEditingController buscador = TextEditingController();
 
   List <Livro> listaLivros = [];
@@ -114,7 +114,7 @@ class _buscalivrosState extends State<Buscalivros>{
                             ), 
                         ),
                           TextFormField(
-                            autofocus: false,
+                            autofocus: true,
                             controller: buscador,
                             onChanged: (String busca) {
                               filterSearch();
@@ -155,25 +155,6 @@ class _buscalivrosState extends State<Buscalivros>{
                                 itemBuilder: (context, index){
                                   return
                                     ListTile(
-                                      onLongPress: () {
-                                        if(isSearching == true){
-                                         chamarTelaCadastro(context,
-                                          livrosFiltrados[index].codigo.toString(), 
-                                          livrosFiltrados[index].titulo.toString(), 
-                                          livrosFiltrados[index].genero.toString(), 
-                                          livrosFiltrados[index].editora.toString(), 
-                                          livrosFiltrados[index].autor.toString(), 
-                                          livrosFiltrados[index].ano.toString());
-                                        }else{
-                                        chamarTelaCadastro(context,
-                                          listaLivros[index].codigo.toString(), 
-                                          listaLivros[index].titulo.toString(), 
-                                          listaLivros[index].genero.toString(), 
-                                          listaLivros[index].editora.toString(),
-                                          listaLivros[index].autor.toString(), 
-                                          listaLivros[index].ano.toString());
-                                        }                                                         
-                                      },
                                       title: 
                                       ExpansionTile(
                                         title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
@@ -189,40 +170,6 @@ class _buscalivrosState extends State<Buscalivros>{
                                         'Gênero: '+ (isSearching == true ? livrosFiltrados[index].genero :listaLivros[index].genero) + '\n'
                                         'Ano: '+ (isSearching == true ? livrosFiltrados[index].ano :listaLivros[index].ano)),
                                         )],
-                                      ),
-                                      leading: Column(
-                                        children: <Widget>[
-                                          IconButton(
-                                            icon: const Icon(Icons.delete),
-                                            onPressed: (){
-                                              showCupertinoDialog(
-                                              context: context, 
-                                              builder: (context){
-                                                return CupertinoAlertDialog(
-                                                  title: Text('ATENÇÃO!'),
-                                                  content: Text('Deseja realmente deletar o livro?'),
-                                                  actions: [
-                                                    CupertinoDialogAction(child: Text('SIM'),
-                                                      isDestructiveAction: true,
-                                                      onPressed: (){
-                                                        deletarLivro(context, listagemLivros[index], index);
-                                                        setState(() {
-                                                          listagemLivros.removeAt(index);
-                                                        });
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                    CupertinoDialogAction(child: Text('NÃO'),
-                                                      isDestructiveAction: true,
-                                                      onPressed: (){
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              });
-                                            }),
-                                        ],
                                       ),
                                     );
                                 });

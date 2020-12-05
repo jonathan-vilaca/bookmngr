@@ -1,4 +1,5 @@
 import 'package:bookmngr/models/biblioopcoes.dart';
+import 'package:bookmngr/models/buscalivros_leitor.dart';
 import 'package:bookmngr/services/loginEmail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _loginState extends State<login> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.transparent,
       body: Container(
         width: size.width,
         height: size.height,
@@ -89,7 +90,8 @@ class _loginState extends State<login> {
                   ),textAlign: TextAlign.left
                   ),
                 ),
-                  TextField(//USUARIO                                
+                  TextField(//USUARIO      
+                    autofocus: false,                          
                     onChanged: (String user){
                       usuario = user;
                     },                 
@@ -105,7 +107,8 @@ class _loginState extends State<login> {
                 SizedBox(
                   height: size.height*.01,
                 ),
-              TextField(//SENHA   
+              TextField(//SENHA  
+                autofocus: false,  
                 onChanged: (String pass){
                     senha = pass;
                   },          
@@ -197,7 +200,8 @@ class _loginState extends State<login> {
                           onPressed: () {
                             _login();  
                             if (login = true){
-                              
+                              Navigator.push(context, MaterialPageRoute(
+                          builder: (BuildContext context) => Buscalivros_leitor()));
                             }else{
                               Fluttertoast.showToast(
                                   msg: "ERRO AO CONECTAR!",

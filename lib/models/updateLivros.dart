@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: camel_case_types
+  dynamic inde;
 class UpdateLivros extends StatefulWidget {
   @override
   _updateLivrosstate createState() => _updateLivrosstate();
@@ -26,12 +27,13 @@ class _updateLivrosstate extends State<UpdateLivros>{
   String codigo = '', titulo = '', genero = '', editora = '', 
         autor = '', ano = '', exemplares = '', disponivel = '';
 
+
   @override
   Widget build(BuildContext context) {    
     var size = MediaQuery.of(context).size;
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.transparent,
       body: Container(
         width: size.width,
         height: size.height,
@@ -79,24 +81,6 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   ), 
                 ),
                 SizedBox(//SEPARADOR DE TEXTFIELD
-                  height: size.height*.008,
-                  width: size.width
-                ),
-              TextFormField(//Código
-                onChanged: (String cod){
-                  codigo = cod;
-                },
-                  controller: cod2,
-                  decoration:
-                    InputDecoration(
-                      labelText: 'Código do livro',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.turned_in),
-                      filled: true,
-                      fillColor: Colors.white70,
-                    ),
-              ),
-              SizedBox(//SEPARADOR DE TEXTFIELD
                   height: size.height*.008,
                   width: size.width
                 ),
@@ -217,18 +201,20 @@ class _updateLivrosstate extends State<UpdateLivros>{
                             ],
                           ),
                           onPressed: () {
-                            if((codigo.length > 0) && (codigo != null) &&
-                              (titulo.length > 0) && (titulo != null) &&
-                              (genero.length > 0) && (genero != null) &&
-                              (editora.length > 0) && (editora != null) &&
-                              (autor.length > 0) && (autor != null) &&
-                              (ano.length > 0) && (ano != null)){
+                            if((cod2.text.toString().length > 0) && (cod2.text.toString() != null) &&
+                              (liv2.text.toString().length > 0) && (liv2.text.toString() != null) &&
+                              (gen2.text.toString().length > 0) && (gen2.text.toString() != null) &&
+                              (edi2.text.toString().length > 0) && (edi2.text.toString() != null) &&
+                              (aut2.text.toString().length > 0) && (aut2.text.toString() != null) &&
+                              (anoLa2.text.toString().length > 0) && (anoLa2.text.toString() != null)){
                               if (state == true){
                                 disponivel = 'Disponível!';
                               }else{
                                 disponivel = 'Indisponível!';
                               }
-                              updateLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
+                              updateLivro(cod2.text.toString(), liv2.text.toString(), 
+                                gen2.text.toString(), edi2.text.toString(), aut2.text.toString(), 
+                                aut2.text.toString(), disponivel);
                               Fluttertoast.showToast(
                                 msg: "LIVRO ATUALIZADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
@@ -296,7 +282,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
 chamarTelaCadastro(context, cod, tit, gen, edi, aut, ano){
 
   Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) => UpdateLivros()));
+    builder: (BuildContext context) => UpdateLivros()));
 
   String codigo = cod;
   String titulo = tit;
@@ -311,7 +297,6 @@ chamarTelaCadastro(context, cod, tit, gen, edi, aut, ano){
   edi2.text = editora;
   aut2.text = autor;
   anoLa2.text = anoLa;
-
 }
 
 limparTextfieldsUpdate(){

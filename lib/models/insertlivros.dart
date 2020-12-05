@@ -23,7 +23,7 @@ class _insertlivrosstate extends State<insertlivros>{
     var size = MediaQuery.of(context).size;
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.transparent,
       body: Container(
         width: size.width,
         height: size.height,
@@ -220,7 +220,7 @@ class _insertlivrosstate extends State<insertlivros>{
                               }else{
                                 disponivel = 'Indisponível!';
                               }
-                              insertLivro(codigo, titulo, genero, editora, autor, ano, disponivel);
+                              insertLivro(codigo.trim(), titulo, genero, editora, autor, ano, disponivel);
                               Fluttertoast.showToast(
                                 msg: "LIVRO CADASTRADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
