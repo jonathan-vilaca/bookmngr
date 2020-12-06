@@ -150,7 +150,7 @@ class _loginState extends State<login> {
                             ],
                           ),
                           onPressed: () {
-                            if(controllerUser.text == null || controllerPass.text == null){
+                            if(controllerUser.text.length <=0 || controllerPass.text.length <=0){
                               Fluttertoast.showToast(
                                 msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
                                 toastLength: Toast.LENGTH_SHORT);

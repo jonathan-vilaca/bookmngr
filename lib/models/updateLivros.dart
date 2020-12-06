@@ -235,9 +235,6 @@ class _updateLivrosstate extends State<UpdateLivros>{
                                 msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
                                 toastLength: Toast.LENGTH_SHORT);
                             }
-                            setState(() {
-                              state = true;
-                            });
                           }),
                       ),
                   ),

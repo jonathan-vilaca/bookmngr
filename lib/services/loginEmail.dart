@@ -21,7 +21,7 @@ void doLogin (BuildContext context,TextEditingController email, TextEditingContr
   }catch (exception){   
     print(exception);
     Fluttertoast.showToast(
-      msg: "USUÁRIO INCORRETO!",
+      msg: "CREDENCIAIS INVÁLIDAS!",
       toastLength: Toast.LENGTH_SHORT);
       Navigator.pop(context);
   }
