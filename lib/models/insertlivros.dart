@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'limparTextField.dart';
-
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 // ignore: camel_case_types
 class insertlivros extends StatefulWidget {
   @override
@@ -17,6 +17,13 @@ class _insertlivrosstate extends State<insertlivros>{
   bool state = true;
   String codigo = '', titulo = '', genero = '', editora = '', 
         autor = '', ano = '', exemplares = '', disponivel = '';
+  List<MaskTextInputFormatter> _maskAno = new List<MaskTextInputFormatter>();
+
+  @override
+  void initState() {
+    _maskAno.add(MaskTextInputFormatter(mask: '####'));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {    
@@ -75,6 +82,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   width: size.width
                 ),
               TextFormField(//Código
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String cod){
                   codigo = cod;
                 },
@@ -93,6 +101,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   width: size.width
                 ),
               TextFormField(//titulo
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String tit){
                   titulo = tit;
                 },
@@ -111,6 +120,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   width: size.width
                 ),
               TextField(//Gênero
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String gen){
                   genero = gen;
                 },
@@ -129,6 +139,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   width: size.width
                 ),
               TextField(//editora
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String edi){
                   editora = edi;
                 },
@@ -147,6 +158,7 @@ class _insertlivrosstate extends State<insertlivros>{
                   width: size.width
                 ),
               TextField(//Autor
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String aut){
                   autor = aut;
                 },
@@ -164,7 +176,8 @@ class _insertlivrosstate extends State<insertlivros>{
                   height: size.height*.008,
                   width: size.width
                 ),
-              TextField(//Ano
+              TextFormField(//Ano
+                inputFormatters: _maskAno,
                 onChanged: (String lancamento){
                   ano = lancamento;
                 },

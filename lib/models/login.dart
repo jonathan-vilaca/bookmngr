@@ -1,5 +1,6 @@
 import 'package:bookmngr/models/biblioopcoes.dart';
 import 'package:bookmngr/models/buscalivros_leitor.dart';
+import 'package:bookmngr/services/loading.dart';
 import 'package:bookmngr/services/loginEmail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,12 @@ class login extends StatefulWidget{
 
 // ignore: camel_case_types
 class _loginState extends State<login> {
-  String usuario, senha, tipousuer;
+  String tipousuer;
   var db = Firestore.instance;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   bool login = false;
+  var controllerUser = TextEditingController();
+  var controllerPass = TextEditingController();
 
   _login() async {
     try{
@@ -40,7 +43,6 @@ class _loginState extends State<login> {
       print(error);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +93,8 @@ class _loginState extends State<login> {
                   ),
                 ),
                   TextField(//USUARIO      
-                    autofocus: false,                          
-                    onChanged: (String user){
-                      usuario = user;
-                    },                 
+                    controller: controllerUser,
+                    autofocus: false,                                        
                     decoration:
                       InputDecoration(
                         labelText: 'Usuário',
@@ -107,11 +107,9 @@ class _loginState extends State<login> {
                 SizedBox(
                   height: size.height*.01,
                 ),
-              TextField(//SENHA  
-                autofocus: false,  
-                onChanged: (String pass){
-                    senha = pass;
-                  },          
+              TextField(//SENHA
+                controller: controllerPass,
+                autofocus: false,         
                 obscureText: true,
                 decoration:
                   InputDecoration(
@@ -152,7 +150,14 @@ class _loginState extends State<login> {
                             ],
                           ),
                           onPressed: () {
-                            doLogin(context, usuario.trim().toLowerCase(), senha.trim().toLowerCase());
+                            if(controllerUser.text == null || controllerPass.text == null){
+                              Fluttertoast.showToast(
+                                msg: "FAVOR PREENCHER TODOS OS CAMPOS!",
+                                toastLength: Toast.LENGTH_SHORT);
+                            }else{
+                              doLogin(context, controllerUser, controllerPass);
+                             LoadingScreen().loading(context);
+                            }
                           }),
                       ),
                   ),
@@ -197,9 +202,9 @@ class _loginState extends State<login> {
                               )
                             ],
                           ),
-                          onPressed: () {
-                            _login();  
+                          onPressed: () { 
                             if (login = true){
+                              _login();
                               Navigator.push(context, MaterialPageRoute(
                           builder: (BuildContext context) => Buscalivros_leitor()));
                             }else{

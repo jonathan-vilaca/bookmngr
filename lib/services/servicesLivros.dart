@@ -27,8 +27,8 @@ deletarLivro(context, liv, position) async {
 }
 
 
-Future updateLivro(a, s, d, g, h, j, k) async{
-  String livro = a;
+updateLivro(a, s, d, g, h, j, k) async{
+  String livro  = a;
   db.collection("acervo")
     .document(livro)
       .updateData(

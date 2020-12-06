@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 // ignore: camel_case_types
   dynamic inde;
@@ -26,7 +27,13 @@ class _updateLivrosstate extends State<UpdateLivros>{
   bool state = true;
   String codigo = '', titulo = '', genero = '', editora = '', 
         autor = '', ano = '', exemplares = '', disponivel = '';
+  List<MaskTextInputFormatter> _maskAno = new List<MaskTextInputFormatter>();
 
+  @override
+  void initState() {
+    _maskAno.add(MaskTextInputFormatter(mask: '####'));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {    
@@ -49,7 +56,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
               Container(
                 height: size.height*.15,
                 width: size.width,
-                color: Colors.red,
+                color: Colors.transparent,
                   child: Image.asset(
                     'images/topo.png', 
                       fit: BoxFit.cover,
@@ -85,6 +92,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   width: size.width
                 ),
               TextFormField(//titulo
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String tit){
                   titulo = tit;
                 },
@@ -103,6 +111,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   width: size.width
                 ),
               TextField(//Gênero
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String gen){
                   genero = gen;
                 },
@@ -121,6 +130,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   width: size.width
                 ),
               TextField(//editora
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String edi){
                   editora = edi;
                 },
@@ -139,6 +149,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   width: size.width
                 ),
               TextField(//Autor
+                textCapitalization: TextCapitalization.sentences,
                 onChanged: (String aut){
                   autor = aut;
                 },
@@ -157,6 +168,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                   width: size.width
                 ),
               TextField(//Ano
+                inputFormatters: _maskAno,
                 onChanged: (String lancamento){
                   ano = lancamento;
                 },
@@ -214,7 +226,7 @@ class _updateLivrosstate extends State<UpdateLivros>{
                               }
                               updateLivro(cod2.text.toString(), liv2.text.toString(), 
                                 gen2.text.toString(), edi2.text.toString(), aut2.text.toString(), 
-                                aut2.text.toString(), disponivel);
+                                anoLa2.text.toString(), disponivel);
                               Fluttertoast.showToast(
                                 msg: "LIVRO ATUALIZADO COM SUCESSO!",
                                 toastLength: Toast.LENGTH_SHORT);
