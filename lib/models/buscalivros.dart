@@ -178,9 +178,13 @@ class _buscalivrosState extends State<Buscalivros>{
                                       ExpansionTile(
                                         title: Text(isSearching == true ? livrosFiltrados[index].titulo : listaLivros[index].titulo,
                                           style: TextStyle(fontWeight: FontWeight.bold)),
-                                            subtitle: listagemLivros[index]['disponivel'] == 'Disponível!' ? Text(
-                                              listagemLivros[index]['disponivel'], style: TextStyle(color: Colors.green)) : 
-                                               Text(listagemLivros[index]['disponivel'], style: TextStyle(color: Colors.red)),
+                                            subtitle: isSearching == true ? (livrosFiltrados[index].disponivel == 'Disponível!' ? Text(
+                                              livrosFiltrados[index].disponivel, style: TextStyle(color: Colors.green)) : 
+                                               Text(livrosFiltrados[index].disponivel, style: TextStyle(color: Colors.red))):
+
+                                               (listaLivros[index].disponivel == 'Disponível!' ? Text(
+                                                listaLivros[index].disponivel, style: TextStyle(color: Colors.green)) : 
+                                               Text(listaLivros[index].disponivel, style: TextStyle(color: Colors.red))),
                                       children: [
                                         Align(alignment: Alignment.centerLeft,
                                         child:
