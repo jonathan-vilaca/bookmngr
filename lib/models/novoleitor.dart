@@ -100,17 +100,15 @@ class _novoleitorState extends State<novoleitor> {
                       color: Colors.indigo[100],
                       onPressed: (){//Botão de criação de novo leitor  
                         try{                   
-                        _newleitor(novousuario, novasenha);
-                        Fluttertoast.showToast(
+                          _newleitor(novousuario, novasenha);
+                          Fluttertoast.showToast(
                             msg: "USUÁRIO CADASTRADO COM SUCESSO!",
                             toastLength: Toast.LENGTH_SHORT,
-
                           );  
                         }catch(error){
                           Fluttertoast.showToast(
                             msg: "USUÁRIO NÃO CADASTRADO!",
                             toastLength: Toast.LENGTH_SHORT,
-
                           );
                         }                 
                       },
